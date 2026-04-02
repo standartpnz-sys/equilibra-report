@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>EquiLibra → Отчёт</title>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const company = params.get('company');
+    const data = params.get('data');
+    if (company && data) {
+      window.location.replace(`https://euphonious-choux-965259.netlify.app/?company=${encodeURIComponent(company)}&data=${encodeURIComponent(data)}`);
+    } else {
+      window.location.replace('https://euphonious-choux-965259.netlify.app/');
+    }
+  </script>
+</head>
+<body>
+  <p>Перенаправляем на отчёт...</p>
+</body>
+</html>
