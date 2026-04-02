@@ -181,6 +181,47 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 .instr-row:nth-child(1) { --labels: "Тип инструмента" "Сумма, млн $"; }
 .instr-row:nth-child(2) { --labels: "Ставка, %" "Срок, мес."; }
 .instr-row:nth-child(3) { --labels: "Налог, %" ""; }
+/* Мобильные поля с подписями */
+.mobile-input-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 16px;
+  width: 100%;
+}
+
+.input-with-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8a96a8;
+  padding-left: 4px;
+}
+
+.input-with-label input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #d0d8e8;
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .instr-row {
+    grid-template-columns: 1fr !important;
+    padding: 16px;
+    gap: 12px;
+  }
+  
+  .mobile-input-group {
+    grid-template-columns: 1fr;   /* на очень узких экранах — в столбик */
+  }
+}
+  
 </style>
 </head>
 <body>
@@ -422,21 +463,43 @@ const TYPES = [
 
 function addRow(def={}) {
   const id = ++rowCounter;
-  const opts = TYPES.map(t=>`<option value="${t.v}"${def.type===t.v?' selected':''}>${t.l}</option>`).join('');
+  const opts = TYPES.map(t => 
+    `<option value="${t.v}"${def.type===t.v ? ' selected' : ''}>${t.l}</option>`
+  ).join('');
+
   const div = document.createElement('div');
-  div.className='instr-row'; 
+  div.className = 'instr-row';
   div.dataset.rid = id;
+  
   div.innerHTML = `
-    <select>${opts}</select>
-    <input type="number" value="${def.amount||500}" min="1" placeholder="Сумма">
-    <input type="number" value="${def.rate||15}" step="0.1" placeholder="Ставка %">
-    <input type="number" value="${def.months||12}" min="1" max="360" placeholder="Срок, мес.">
-    <input type="number" value="${def.tax||25}" step="0.5" placeholder="Налог %">
+    <!-- Выбор типа инструмента — на всю ширину -->
+    <select style="grid-column: 1 / -1; margin-bottom: 12px;">${opts}</select>
+    
+    <!-- Блок с 4 полями + подписями слева -->
+    <div class="mobile-input-group">
+      <div class="input-with-label">
+        <span class="field-label">Сумма, млн $</span>
+        <input type="number" value="${def.amount||500}" min="1">
+      </div>
+      <div class="input-with-label">
+        <span class="field-label">Ставка, %</span>
+        <input type="number" value="${def.rate||15}" step="0.1">
+      </div>
+      <div class="input-with-label">
+        <span class="field-label">Срок, мес.</span>
+        <input type="number" value="${def.months||12}" min="1" max="360">
+      </div>
+      <div class="input-with-label">
+        <span class="field-label">Налог, %</span>
+        <input type="number" value="${def.tax||25}" step="0.5">
+      </div>
+    </div>
+    
     <button class="btn-del" onclick="delRow(${id})">×</button>
   `;
+  
   document.getElementById('instrList').appendChild(div);
 }
-
 function delRow(id){
   const el=document.querySelector(`[data-rid="${id}"]`);
   if(el) el.remove();
