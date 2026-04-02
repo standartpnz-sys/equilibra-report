@@ -221,7 +221,41 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
     grid-template-columns: 1fr;   /* на очень узких экранах — в столбик */
   }
 }
-  
+/* ====================== МОБИЛЬНЫЕ ПОЛЯ ИНСТРУМЕНТОВ ====================== */
+.mobile-input-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+.input-with-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8a96a8;
+  padding-left: 6px;
+}
+
+.input-with-label input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #d0d8e8;
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+/* На очень узких экранах — всё в одну колонку */
+@media (max-width: 480px) {
+  .mobile-input-group {
+    grid-template-columns: 1fr;
+  }
+}  
 </style>
 </head>
 <body>
@@ -472,10 +506,10 @@ function addRow(def={}) {
   div.dataset.rid = id;
   
   div.innerHTML = `
-    <!-- Выбор типа инструмента — на всю ширину -->
+    <!-- Выбор типа — на всю ширину -->
     <select style="grid-column: 1 / -1; margin-bottom: 12px;">${opts}</select>
     
-    <!-- Блок с 4 полями + подписями слева -->
+    <!-- 4 поля с подписями слева -->
     <div class="mobile-input-group">
       <div class="input-with-label">
         <span class="field-label">Сумма, млн $</span>
@@ -500,6 +534,7 @@ function addRow(def={}) {
   
   document.getElementById('instrList').appendChild(div);
 }
+  
 function delRow(id){
   const el=document.querySelector(`[data-rid="${id}"]`);
   if(el) el.remove();
