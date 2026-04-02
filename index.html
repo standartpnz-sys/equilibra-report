@@ -142,7 +142,28 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
   
   .page-header h1 { font-size: 22px; }
 }
- 
+ /* ── ФОРМА СЦЕНАРИЯ — делаем в 2 строки + вертикально на очень узких ── */
+  .instr-hdr {
+    grid-template-columns: 1fr 1fr;           /* заголовок тоже в 2 колонки */
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+  
+  .instr-row {
+    grid-template-columns: 1fr 1fr;           /* 2 строки по 3 поля */
+    gap: 10px;
+    padding: 12px 10px;
+  }
+  
+  .instr-row select,
+  .instr-row input {
+    width: 100%;
+    font-size: 13px;
+  }
+  
+  .btn-del {
+    grid-column: span 2;                      /* кнопка удаления на всю ширину */
+  }
 </style>
 </head>
 <body>
