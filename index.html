@@ -105,40 +105,43 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 #placeholder code{display:inline-block;margin-top:12px;background:#1a2332;color:#7be3a1;
   font-size:12px;padding:10px 18px;border-radius:8px;text-align:left;line-height:1.8}
 
-  /* ── ФОРМА СЦЕНАРИЯ НА МОБИЛЬНЫХ — вертикально с понятными лейблами ── */
-  .instr-hdr {
-    display: none !important;
+ /* ── MOBILE ADAPTATION ── */
+@media (max-width: 768px) {
+  body { padding: 16px 12px; }
+  
+  .metrics-grid,
+  .debt-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 12px; 
   }
   
-  .instr-row {
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
-    padding: 16px !important;
-    background: #f8faff;
-    border-radius: 12px;
-    border: 1.5px solid #d0d8e8;
+  .chart-card { 
+    padding: 20px 16px; 
+    margin-bottom: 16px; 
   }
   
-  .instr-row select,
-  .instr-row input {
-    width: 100% !important;
-    font-size: 15px !important;
-    padding: 12px 14px !important;
+  .instr-hdr,
+  .instr-row { 
+    grid-template-columns: 140px 80px 60px 60px 60px 30px; 
+    font-size: 11px; 
+    padding: 8px 10px; 
+    overflow-x: auto; 
   }
   
-  /* Лейблы над каждым полем */
-  .instr-row > *:nth-child(1)::before { content: "Тип инструмента"; display: block; font-size: 11px; color: #8a96a8; margin-bottom: 4px; font-weight: 600; }
-  .instr-row > *:nth-child(2)::before { content: "Сумма, млн $"; display: block; font-size: 11px; color: #8a96a8; margin-bottom: 4px; font-weight: 600; }
-  .instr-row > *:nth-child(3)::before { content: "Ставка, %"; display: block; font-size: 11px; color: #8a96a8; margin-bottom: 4px; font-weight: 600; }
-  .instr-row > *:nth-child(4)::before { content: "Срок, мес."; display: block; font-size: 11px; color: #8a96a8; margin-bottom: 4px; font-weight: 600; }
-  .instr-row > *:nth-child(5)::before { content: "Налог, %"; display: block; font-size: 11px; color: #8a96a8; margin-bottom: 4px; font-weight: 600; }
-  
-  .btn-del {
-    grid-column: span 1 !important;
-    width: 40px;
-    height: 40px;
-    margin: 0 auto;
+  .ann-item { 
+    min-width: 100%; 
+    margin-bottom: 12px; 
   }
+  
+  .metric-value { font-size: 18px; }
+  .ann-base { font-size: 17px; }
+  
+  .scenario-card { padding: 20px 16px; }
+  
+  .chart-wrap { height: 340px !important; }
+  
+  .page-header h1 { font-size: 22px; }
+}
  
 </style>
 </head>
