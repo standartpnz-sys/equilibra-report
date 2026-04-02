@@ -476,6 +476,16 @@ function loadFromUrl() {
       urlScenarioData = scenPayload;
       activeScenario  = scenPayload;
     }
+      // Автозаполнение инструментов из сценария бота
+    if (rawData.instruments && Array.isArray(rawData.instruments)) {
+      rawData.instruments.forEach(instr => {
+        addRow(instr);
+      });
+      // Автоматически применяем сценарий
+      setTimeout(() => {
+        applyScenario();
+      }, 300);
+    }
   } catch(e) {
     console.warn('loadFromUrl error:', e);
   }
