@@ -11,21 +11,31 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;padding:32px 24px;color:#1a2332}
- 
+
 .page-header{text-align:center;margin-bottom:36px}
 .company-tag{display:inline-block;background:#1a3a6b;color:#fff;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:3px;margin-bottom:12px}
 .page-header h1{font-size:26px;font-weight:700;color:#1a2332;margin-bottom:6px}
 .page-header p{font-size:13px;color:#6b7a92}
- 
+
+/* URL scenario banner */
+.url-banner{display:none;background:linear-gradient(135deg,#1a3a6b,#2a5a9b);color:#fff;border-radius:10px;padding:14px 20px;margin-bottom:20px;max-width:1100px;margin-left:auto;margin-right:auto;align-items:center;gap:14px}
+.url-banner.show{display:flex}
+.url-banner-icon{font-size:22px;flex-shrink:0}
+.url-banner-text{flex:1}
+.url-banner-text strong{display:block;font-size:14px;font-weight:700;margin-bottom:2px}
+.url-banner-text span{font-size:12px;opacity:.85}
+.url-banner-close{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:6px;padding:5px 10px;cursor:pointer;font-size:12px;font-family:inherit;font-weight:600}
+.url-banner-close:hover{background:rgba(255,255,255,.25)}
+
 .year-tabs{display:flex;justify-content:center;gap:8px;margin-bottom:28px}
 .tab{padding:8px 22px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;border:2px solid #d0d8e8;background:#fff;color:#6b7a92;transition:all .2s}
 .tab.active{background:#1a3a6b;border-color:#1a3a6b;color:#fff}
- 
+
 .chart-card{background:#fff;border-radius:14px;box-shadow:0 2px 20px rgba(0,0,0,.08);padding:32px 28px 24px;margin-bottom:24px;max-width:1100px;margin-left:auto;margin-right:auto}
 .chart-title{font-size:16px;font-weight:700;color:#1a2332;margin-bottom:4px}
 .chart-subtitle{font-size:12px;color:#8a96a8;margin-bottom:24px}
 .chart-wrap{position:relative;height:420px}
- 
+
 .annotations{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:28px;max-width:1100px;margin-left:auto;margin-right:auto}
 .ann-item{flex:1;min-width:210px;max-width:320px;background:#f0f4ff;border-left:4px solid #1a3a6b;padding:14px 16px;border-radius:0 8px 8px 0}
 .ann-label{font-size:10px;color:#8a96a8;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:4px}
@@ -35,7 +45,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 .ann-scen{font-size:14px;font-weight:700;color:#e65100;margin-top:5px}
 .ann-delta{font-size:11px;font-weight:600;margin-top:2px}
 .dp{color:#2e7d32}.dn{color:#c62828}
- 
+
 .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1100px;margin:0 auto 24px}
 .metric-card{background:#fff;border-radius:10px;padding:16px 18px;box-shadow:0 1px 8px rgba(0,0,0,.06);border-top:3px solid #e0e6f0}
 .metric-card.positive{border-top-color:#2e7d32}
@@ -46,24 +56,29 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 .metric-value{font-size:22px;font-weight:700;color:#1a2332;margin-bottom:2px}
 .metric-scen{font-size:13px;font-weight:600;color:#e65100;margin-top:2px}
 .metric-delta{font-size:12px;font-weight:500}
- 
+
 .legend-row{display:flex;gap:20px;justify-content:center;margin-top:16px;flex-wrap:wrap;align-items:center}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#6b7a92}
 .legend-dot{width:12px;height:12px;border-radius:2px;flex-shrink:0}
 .note{text-align:center;font-size:11px;color:#a0aab8;margin-top:6px}
- 
+
+/* Grouped bar legend */
+#legendGrouped{display:none;gap:20px;justify-content:center;margin-top:16px;flex-wrap:wrap;align-items:center}
+#legendGrouped.show{display:flex}
+.lgnd-swatch{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+
 /* Debt panel */
 .debt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
 .debt-card{background:#f8faff;border-radius:10px;padding:16px 18px;border:1.5px solid #d8e3f5;border-top:4px solid #7c4dff}
 .debt-card.ok{border-top-color:#2e7d32}
 .debt-card.mod{border-top-color:#e65100}
 .debt-card.bad{border-top-color:#c62828}
- 
+
 /* Scenario form */
 .scenario-card{background:#fff;border-radius:14px;box-shadow:0 2px 20px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:24px;max-width:1100px;margin-left:auto;margin-right:auto}
 .scenario-title{font-size:15px;font-weight:700;color:#1a2332;margin-bottom:4px}
 .scenario-subtitle{font-size:12px;color:#8a96a8;margin-bottom:16px}
- 
+
 .instr-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
 .instr-hdr{display:grid;grid-template-columns:180px 110px 90px 80px 80px 34px;gap:8px;padding:0 14px;margin-bottom:2px}
 .instr-hdr span{font-size:10px;font-weight:700;color:#8a96a8;text-transform:uppercase;letter-spacing:.7px}
@@ -72,14 +87,14 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 .instr-row select:focus,.instr-row input:focus{border-color:#1a3a6b}
 .btn-del{width:30px;height:30px;border:1.5px solid #e8d0d0;background:#fff5f5;border-radius:7px;color:#c62828;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;padding:0;font-weight:300}
 .btn-del:hover{background:#ffeaea;border-color:#c62828}
- 
+
 .form-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px}
 .btn{padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;transition:all .2s;border:none}
 .btn-primary{background:#1a3a6b;color:#fff}.btn-primary:hover{background:#2a5a9b}
 .btn-add{background:#f0f4ff;color:#1a3a6b;border:1.5px solid #b8cbee}.btn-add:hover{background:#dde8ff}
 .btn-reset{background:transparent;color:#8a96a8;border:1.5px solid #d0d8e8}.btn-reset:hover{border-color:#c62828;color:#c62828}
 .btn-pdf{background:#fff8f0;color:#e65100;border:1.5px solid #f5c89a}.btn-pdf:hover{background:#ffe8d0}
- 
+
 .calc-result{display:none;margin-top:16px;background:#f8faff;border:1.5px solid #d0d8e8;border-radius:10px;padding:16px 18px}
 .calc-result.show{display:block}
 .calc-result h4{font-size:13px;font-weight:700;color:#1a3a6b;margin-bottom:10px}
@@ -87,7 +102,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 .calc-line{font-size:12px;color:#1a2332;padding:6px 10px;background:#fff;border-radius:6px;border:1px solid #e8edf5;display:flex;justify-content:space-between;gap:8px}
 .calc-line .cv{font-weight:700;white-space:nowrap}
 .cv.pos{color:#2e7d32}.cv.neg{color:#c62828}
- 
+
 #pdfOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center}
 #pdfOverlay.show{display:flex}
 #pdfBox{background:#fff;border-radius:16px;padding:32px 40px;text-align:center;max-width:320px;box-shadow:0 8px 40px rgba(0,0,0,.3)}
@@ -98,7 +113,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 </style>
 </head>
 <body>
- 
+
 <div id="pdfOverlay">
   <div id="pdfBox">
     <div class="spinner"></div>
@@ -106,41 +121,62 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
     <p>Рендеринг страницы, подождите</p>
   </div>
 </div>
- 
+
 <div id="mainContent">
- 
+
 <div class="page-header">
-  <div class="company-tag">ПАО ГМК «Норильский никель»</div>
-  <h1>Анализ денежного потока</h1>
+  <div class="company-tag" id="companyTag">ПАО ГМК «Норильский никель»</div>
+  <h1>Анализ свободного денежного потока</h1>
   <p>Раскрываемая консолидированная финансовая отчётность по МСФО · млн долл. США</p>
 </div>
- 
-<div class="year-tabs">
+
+<!-- URL scenario banner -->
+<div class="url-banner" id="urlBanner">
+  <div class="url-banner-icon">🔗</div>
+  <div class="url-banner-text">
+    <strong id="urlBannerTitle">Данные из EquiLibra Bot</strong>
+    <span id="urlBannerSub">Сценарий загружен автоматически</span>
+  </div>
+  <button class="url-banner-close" onclick="dismissUrlBanner()">Скрыть</button>
+</div>
+
+<div class="year-tabs" id="yearTabs">
   <div class="tab active" onclick="showYear(2025,this)">2025</div>
   <div class="tab" onclick="showYear(2024,this)">2024</div>
   <div class="tab" onclick="showYear(2023,this)">2023</div>
 </div>
- 
+
 <div class="metrics-grid" id="metrics"></div>
- 
+
 <div class="chart-card">
   <div class="chart-title" id="chartTitle">Водопадный анализ денежного потока — 2025</div>
   <div class="chart-subtitle">От выручки до FCF · млн долл. США</div>
-  <div class="chart-wrap"><canvas id="waterfallChart"></canvas></div>
-  <div class="legend-row">
+  <div class="chart-wrap" id="chartWrap" style="height:420px"><canvas id="waterfallChart"></canvas></div>
+
+  <!-- Standard legend (no scenario) -->
+  <div class="legend-row" id="legendStd">
     <div class="legend-item"><div class="legend-dot" style="background:#5c85c8"></div>Итоговый показатель</div>
     <div class="legend-item"><div class="legend-dot" style="background:#e57373"></div>Вычет (расход)</div>
     <div class="legend-item"><div class="legend-dot" style="background:#66bb6a"></div>Прибавление</div>
-    <div class="legend-item" id="scenHintLegend" style="display:none;border-left:2px solid #d0d8e8;padding-left:14px">
-      <div class="legend-dot" style="background:#5c85c888"></div>&nbsp;Базовый&nbsp;&nbsp;
-      <div class="legend-dot" style="background:#5c85c8;border:2px solid #3a63a6;margin-left:6px"></div>&nbsp;Сценарий
-    </div>
   </div>
+
+  <!-- Grouped legend (scenario active) -->
+  <div id="legendGrouped">
+    <span style="font-size:12px;font-weight:600;color:#1a2332;margin-right:4px">Базовый:</span>
+    <div class="legend-item"><div class="lgnd-swatch" style="background:#5c85c8"></div>Итого</div>
+    <div class="legend-item"><div class="lgnd-swatch" style="background:#e57373"></div>Расход</div>
+    <div class="legend-item"><div class="lgnd-swatch" style="background:#66bb6a"></div>Приход</div>
+    <span style="font-size:12px;font-weight:600;color:#e65100;margin-left:14px;margin-right:4px">Сценарий:</span>
+    <div class="legend-item"><div class="lgnd-swatch" style="background:#7c4dff"></div>Итого</div>
+    <div class="legend-item"><div class="lgnd-swatch" style="background:#ff7043"></div>Расход</div>
+    <div class="legend-item"><div class="lgnd-swatch" style="background:#26a69a"></div>Приход</div>
+  </div>
+
   <div class="note">* Себестоимость, адм. и ком. расходы — без амортизации (D&amp;A учтена в EBITDA)</div>
 </div>
- 
+
 <div class="annotations" id="annotations"></div>
- 
+
 <!-- Debt metrics panel -->
 <div class="chart-card" id="debtCard">
   <div class="chart-title">Долговые метрики и ковенанты</div>
@@ -148,12 +184,12 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
   <div class="debt-grid" id="debtGrid"></div>
   <div class="chart-wrap" style="height:260px"><canvas id="debtChart"></canvas></div>
 </div>
- 
+
 <!-- Scenario -->
 <div class="scenario-card">
   <div class="scenario-title">🔧 Сценарный анализ — финансовые инструменты</div>
   <div class="scenario-subtitle">Добавьте несколько инструментов — система суммирует их влияние и обновит все показатели</div>
- 
+
   <div class="instr-hdr">
     <span>Тип инструмента</span>
     <span>Сумма, млн $</span>
@@ -163,7 +199,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
     <span></span>
   </div>
   <div class="instr-list" id="instrList"></div>
- 
+
   <div class="form-actions">
     <button class="btn btn-add" onclick="addRow()">＋ Добавить инструмент</button>
     <button class="btn btn-primary" onclick="applyScenario()">▶ Применить сценарий</button>
@@ -171,27 +207,25 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
     <button class="btn btn-pdf" onclick="exportPDF()">⬇ Сохранить в PDF</button>
     <span id="scenLabel" style="font-size:12px;color:#8a96a8;margin-left:4px"></span>
   </div>
- 
+
   <div class="calc-result" id="calcResult">
     <h4 id="calcTitle"></h4>
     <div class="calc-lines" id="calcLines"></div>
   </div>
 </div>
- 
+
 <!-- Trend chart -->
 <div class="chart-card">
   <div class="chart-title">Динамика ключевых метрик 2023–2025</div>
-  <div class="chart-subtitle">При активном сценарии показатели 2025 обновляются поверх базовых значений (оранжевый)</div>
+  <div class="chart-subtitle">При активном сценарии показатели выбранного года обновляются поверх базовых значений (оранжевый)</div>
   <div class="chart-wrap" style="height:320px"><canvas id="trendChart"></canvas></div>
 </div>
- 
+
 </div><!-- #mainContent -->
- 
+
 <script>
 // ═══════════════════════════════════════════════
-// DATA
-// leases: 2025=548, 2024=462, 2023=520
-// cov_ebitda ≈ EBITDA + impairment + social charges (Норникель практика)
+// DATA — base values for all 3 years
 // ═══════════════════════════════════════════════
 const data = {
   2025:{ revenue:13763, cogs_cash:5673, admin:1146, commercial:295,
@@ -207,15 +241,104 @@ const data = {
          capex:2988, interest_paid:791,  fcf:1949, ebitda_margin:47.8,
          debt:9712,  cash:2139, leases:520, cov_ebitda:7242 },
 };
- 
+
 const netDebt  = d => d.debt - d.cash;
 const covDebt  = d => (d.debt - d.leases) - d.cash;
 const fmtB     = v => `$${(v/1000).toFixed(1)}B`;
 const fmtB2    = v => `$${(v/1000).toFixed(2)}B`;
- 
+
 let wfChart=null, debtChartObj=null, trendChartObj=null;
 let activeYear=2025, activeScenario=null, rowCounter=0;
- 
+let urlScenarioData=null; // scenario loaded from URL (bot-injected)
+
+// ═══════════════════════════════════════════════
+// URL LOADER — reads ?company=...&data=JSON
+// Supports: { "2025": {...} }  or
+//           { "2025": {...}, "2025_scenario": {...} }
+// ═══════════════════════════════════════════════
+function loadFromUrl() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has('data')) return;
+
+    const company = params.get('company') || 'ПАО ГМК «Норильский никель»';
+    const rawData = JSON.parse(decodeURIComponent(params.get('data')));
+
+    // Detect year keys like "2025", "2024", "2023"
+    const yearKeys = Object.keys(rawData).filter(k => /^\d{4}$/.test(k));
+    if (!yearKeys.length) return;
+
+    // Merge incoming base data into our data object
+    yearKeys.forEach(yr => {
+      const y = parseInt(yr);
+      if (rawData[yr] && typeof rawData[yr] === 'object') {
+        // Merge: keep existing fields, override with incoming
+        data[y] = Object.assign({}, data[y] || {}, rawData[yr]);
+      }
+    });
+
+    // Check for scenario key, e.g. "2025_scenario"
+    let scenYear = null, scenPayload = null;
+    for (const k of Object.keys(rawData)) {
+      const m = k.match(/^(\d{4})_scenario$/);
+      if (m) {
+        scenYear = parseInt(m[1]);
+        scenPayload = Object.assign({}, data[scenYear] || {}, rawData[k]);
+        break;
+      }
+    }
+
+    // Update company tag
+    document.getElementById('companyTag').textContent = company;
+
+    // Switch to the first year in the payload
+    const firstYear = parseInt(yearKeys[0]);
+    activeYear = firstYear;
+
+    // Highlight the correct tab (or add tab if missing)
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    let tabFound = false;
+    document.querySelectorAll('.tab').forEach(t => {
+      if (parseInt(t.textContent) === firstYear) {
+        t.classList.add('active');
+        tabFound = true;
+      }
+    });
+    if (!tabFound) {
+      // Year not in default tabs — add it
+      const tab = document.createElement('div');
+      tab.className = 'tab active';
+      tab.textContent = firstYear;
+      tab.onclick = function(){ showYear(firstYear, this); };
+      document.getElementById('yearTabs').prepend(tab);
+    }
+
+    // Show banner
+    const banner = document.getElementById('urlBanner');
+    banner.classList.add('show');
+    document.getElementById('urlBannerTitle').textContent = company;
+    if (scenPayload) {
+      document.getElementById('urlBannerSub').textContent =
+        `Получен сценарный анализ за ${scenYear} г. — сравнение «базовый vs сценарий» активно`;
+    } else {
+      document.getElementById('urlBannerSub').textContent =
+        `Данные за ${yearKeys.join(', ')} г. загружены из EquiLibra Bot`;
+    }
+
+    // Store URL scenario if present
+    if (scenPayload) {
+      urlScenarioData = scenPayload;
+      activeScenario  = scenPayload;
+    }
+  } catch(e) {
+    console.warn('loadFromUrl error:', e);
+  }
+}
+
+function dismissUrlBanner() {
+  document.getElementById('urlBanner').classList.remove('show');
+}
+
 // ═══════════════════════════════════════════════
 // INSTRUMENT ROWS
 // ═══════════════════════════════════════════════
@@ -225,7 +348,7 @@ const TYPES = [
   {v:'deposit', l:'Депозит (размещение средств)'},
   {v:'trade',   l:'Торговый / Supply-Chain Finance'},
 ];
- 
+
 function addRow(def={}) {
   const id = ++rowCounter;
   const opts = TYPES.map(t=>`<option value="${t.v}"${def.type===t.v?' selected':''}>${t.l}</option>`).join('');
@@ -240,12 +363,12 @@ function addRow(def={}) {
     <button class="btn-del" onclick="delRow(${id})">×</button>`;
   document.getElementById('instrList').appendChild(div);
 }
- 
+
 function delRow(id){
   const el=document.querySelector(`[data-rid="${id}"]`);
   if(el) el.remove();
 }
- 
+
 function getRows(){
   return [...document.querySelectorAll('#instrList .instr-row')].map(row=>{
     const [sel,...ins]=row.querySelectorAll('select,input');
@@ -253,7 +376,7 @@ function getRows(){
             months:+ins[2].value||12, tax:+ins[3].value||25};
   });
 }
- 
+
 // ═══════════════════════════════════════════════
 // SCENARIO CALCULATOR
 // ═══════════════════════════════════════════════
@@ -283,7 +406,7 @@ function calcOne(s, {type,amount,rate,months,tax:tp}){
   }
   return lines;
 }
- 
+
 function calcScenario(year, instrs){
   let s={...data[year]};
   const allLines=[];
@@ -291,89 +414,197 @@ function calcScenario(year, instrs){
   s.fcf=s.ocf-s.capex-s.interest_paid;
   return {scenData:s, lines:allLines};
 }
- 
+
 // ═══════════════════════════════════════════════
-// WATERFALL
+// WATERFALL — grouped bar chart
+//   Palette A (base):     blue total, red dec, green inc
+//   Palette B (scenario): purple total, orange dec, teal inc
 // ═══════════════════════════════════════════════
-function buildWF(src,alpha){
-  const d=typeof src==='object'?src:data[src], a=alpha||'';
-  const c=h=>h+a;
-  const steps=[
-    {label:'Выручка',               value: d.revenue,       type:'base'},
-    {label:'Себест. (без D&A)*',    value:-d.cogs_cash,     type:'dec'},
-    {label:'Адм. расх. (без D&A)*', value:-d.admin,         type:'dec'},
-    {label:'Ком. расх. (без D&A)*', value:-d.commercial,    type:'dec'},
-    {label:'EBITDA',                value: d.ebitda,        type:'total'},
-    {label:'Налог на прибыль',      value:-d.tax,           type:'dec'},
-    {label:'Изм. ЧОК (OPEX)',       value: d.wc_change,     type:d.wc_change>=0?'inc':'dec'},
-    {label:'OCF',                   value: d.ocf,           type:'total'},
-    {label:'CAPEX',                 value:-d.capex,         type:'dec'},
-    {label:'Проц. расходы',         value:-d.interest_paid, type:'dec'},
-    {label:"FCF'",                  value: d.fcf,           type:'total'},
+const PAL_BASE = {
+  total:  { bg:'#5c85c888', br:'#3a63a6' },   // 50% прозрачность
+  dec:    { bg:'#e5737388', br:'#c62828' },
+  inc:    { bg:'#66bb6a88', br:'#2e7d32' },
+};
+
+const PAL_SCEN = {
+  total:  { bg:'#5c85c8', br:'#3a63a6' },     // яркие, как раньше
+  dec:    { bg:'#e57373', br:'#c62828' },
+  inc:    { bg:'#66bb6a', br:'#2e7d32' },
+};
+
+function buildWFSteps(src) {
+  const d = typeof src === 'object' ? src : data[src];
+  return [
+    { label:'Выручка',               value: d.revenue,       type:'base'  },
+    { label:'Себест. (без D&A)*',    value:-d.cogs_cash,     type:'dec'   },
+    { label:'Адм. расх. (без D&A)*', value:-d.admin,         type:'dec'   },
+    { label:'Ком. расх. (без D&A)*', value:-d.commercial,    type:'dec'   },
+    { label:'EBITDA',                value: d.ebitda,        type:'total' },
+    { label:'Налог на прибыль',      value:-d.tax,           type:'dec'   },
+    { label:'Изм. ЧОК (OPEX)',       value: d.wc_change,     type: d.wc_change >= 0 ? 'inc' : 'dec' },
+    { label:'OCF',                   value: d.ocf,           type:'total' },
+    { label:'CAPEX',                 value:-d.capex,         type:'dec'   },
+    { label:'Проц. расходы',         value:-d.interest_paid, type:'dec'   },
+    { label:"FCF'",                  value: d.fcf,           type:'total' },
   ];
-  let run=0;
-  const starts=[],heights=[],colors=[],borders=[];
-  for(const s of steps){
-    if(s.type==='base'||s.type==='total'){
-      starts.push(0); heights.push(s.value);
-      colors.push(c('#5c85c8')); borders.push(c('#3a63a6')); run=s.value;
-    } else if(s.value>=0){
-      starts.push(run); heights.push(s.value);
-      colors.push(c('#66bb6a')); borders.push(c('#2e7d32')); run+=s.value;
-    } else {
-      starts.push(run+s.value); heights.push(-s.value);
-      colors.push(c('#e57373')); borders.push(c('#c62828')); run+=s.value;
-    }
-  }
-  return {labels:steps.map(s=>s.label),steps,
-          barData:starts.map((s,i)=>[s,s+heights[i]]),colors,borders};
 }
- 
-function renderWaterfall(year,scenData){
-  const hasS=!!scenData;
-  const base=buildWF(year,hasS?'88':'');
-  const scen=hasS?buildWF(scenData,''):null;
-  document.getElementById('chartTitle').textContent=
-    `Водопадный анализ денежного потока — ${year}${hasS?' · Сценарий':''}`;
-  document.getElementById('scenHintLegend').style.display=hasS?'flex':'none';
-  if(wfChart) wfChart.destroy();
-  const ctx=document.getElementById('waterfallChart').getContext('2d');
-  const datasets=[{label:`Базовый ${year}`,data:base.barData,
-    backgroundColor:base.colors,borderColor:base.borders,borderWidth:1.5,borderRadius:3}];
-  if(hasS) datasets.push({label:'Сценарий',data:scen.barData,
-    backgroundColor:scen.colors,borderColor:scen.borders,borderWidth:2.5,borderRadius:3});
-  const allS=[base.steps,hasS?scen.steps:null];
-  wfChart=new Chart(ctx,{
-    type:'bar', data:{labels:base.labels,datasets},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},
-        tooltip:{backgroundColor:'#1a2332',titleColor:'#fff',bodyColor:'#c8d8f0',padding:10,cornerRadius:6,
-          callbacks:{title:a=>base.steps[a[0].dataIndex].label,
-            label:tc=>{const st=(allS[tc.datasetIndex]||base.steps)[tc.dataIndex];
-              const v=Math.abs(st.value),sg=(st.type==='base'||st.type==='total')?'':(st.value>=0?'+':'−');
-              return ` ${tc.datasetIndex===0?'(база) ':'(сценарий) '}${sg}${v.toLocaleString('ru-RU')} млн $`;}}}},
-      scales:{
-        x:{grid:{display:false},ticks:{font:{size:11},color:'#6b7a92',maxRotation:30}},
-        y:{grid:{color:'#eef0f5'},beginAtZero:true,
-           ticks:{font:{size:11},color:'#6b7a92',callback:v=>v>=1000?(v/1000).toFixed(0)+'k':v}}}},
-    plugins:[{id:'vl',afterDatasetsDraw(ch){
-      const {ctx:c,scales:{y}}=ch; c.save();
-      ch.data.datasets.forEach((ds,di)=>{
-        const steps=allS[di]||base.steps, meta=ch.getDatasetMeta(di);
-        const offX=hasS?(di===0?-7:7):0;
-        ds.data.forEach((val,i)=>{
-          const av=Math.abs(steps[i].value);
-          const lbl=av>=1000?(av/1000).toFixed(1)+'k':av.toString();
-          c.fillStyle=di===0?'#9aa3b2':'#1a2332';
-          c.font=`${di===0?'500 10':'600 11'}px "IBM Plex Sans",sans-serif`;
-          c.textAlign='center'; c.textBaseline='bottom';
-          c.fillText(lbl,meta.data[i].x+offX,y.getPixelForValue(Math.max(val[0],val[1]))-4);
-        });
-      }); c.restore();
-    }}]
+
+function stepsToFloating(steps) {
+  // returns array of [start, end] for each bar
+  let run = 0;
+  return steps.map(s => {
+    if (s.type === 'base' || s.type === 'total') {
+      const r = [0, s.value];
+      run = s.value;
+      return r;
+    } else if (s.value >= 0) {
+      const r = [run, run + s.value];
+      run += s.value;
+      return r;
+    } else {
+      const r = [run + s.value, run];
+      run += s.value;
+      return r;
+    }
   });
 }
- 
+
+function renderWaterfall(year, scenData) {
+  const hasS = !!scenData;
+  const baseSteps = buildWFSteps(year);
+  const scenSteps = hasS ? buildWFSteps(scenData) : null;
+
+  const baseFloating = stepsToFloating(baseSteps);
+  const scenFloating = hasS ? stepsToFloating(scenSteps) : null;
+
+  // Color arrays
+  const baseColors = baseSteps.map(s =>
+    s.type === 'base' || s.type === 'total' ? PAL_BASE.total.bg :
+    s.value >= 0 ? PAL_BASE.inc.bg : PAL_BASE.dec.bg
+  );
+  const baseBorders = baseSteps.map(s =>
+    s.type === 'base' || s.type === 'total' ? PAL_BASE.total.br :
+    s.value >= 0 ? PAL_BASE.inc.br : PAL_BASE.dec.br
+  );
+
+  const scenColors  = hasS ? scenSteps.map(s =>
+    s.type === 'base' || s.type === 'total' ? PAL_SCEN.total.bg :
+    s.value >= 0 ? PAL_SCEN.inc.bg : PAL_SCEN.dec.bg
+  ) : [];
+  const scenBorders = hasS ? scenSteps.map(s =>
+    s.type === 'base' || s.type === 'total' ? PAL_SCEN.total.br :
+    s.value >= 0 ? PAL_SCEN.inc.br : PAL_SCEN.dec.br
+  ) : [];
+
+  document.getElementById('chartTitle').textContent =
+    `Водопадный анализ денежного потока — ${year}${hasS ? ' · База vs Сценарий' : ''}`;
+
+  // Toggle legends
+  document.getElementById('legendStd').style.display    = hasS ? 'none'  : 'flex';
+  document.getElementById('legendGrouped').classList.toggle('show', hasS);
+
+  // Adjust chart height for grouped mode (more bars)
+  document.getElementById('chartWrap').style.height = hasS ? '480px' : '420px';
+
+  if (wfChart) wfChart.destroy();
+  const ctx = document.getElementById('waterfallChart').getContext('2d');
+
+  const datasets = [{
+    label: `Базовый ${year}`,
+    data: baseFloating,
+    backgroundColor: baseColors,
+    borderColor: baseBorders,
+    borderWidth: 1.5,
+    borderRadius: 3,
+    categoryPercentage: hasS ? 0.85 : 0.6,
+    barPercentage:      hasS ? 0.48 : 0.75,
+  }];
+
+  if (hasS) {
+    datasets.push({
+      label: 'Сценарий',
+      data: scenFloating,
+      backgroundColor: scenColors,
+      borderColor: scenBorders,
+      borderWidth: 2,
+      borderRadius: 3,
+      categoryPercentage: 0.85,
+      barPercentage: 0.48,
+    });
+  }
+
+  // Value label plugin
+  const valueLabelPlugin = {
+    id: 'vl',
+    afterDatasetsDraw(ch) {
+      const { ctx: c, scales: { y } } = ch;
+      c.save();
+      const allSteps = [baseSteps, scenSteps];
+      ch.data.datasets.forEach((ds, di) => {
+        const steps = allSteps[di] || baseSteps;
+        const meta  = ch.getDatasetMeta(di);
+        ds.data.forEach((val, i) => {
+          const av  = Math.abs(steps[i].value);
+          const lbl = av >= 1000 ? (av / 1000).toFixed(1) + 'k' : av.toString();
+          c.fillStyle    = di === 0 ? '#4a6090' : '#5a2d9a';
+          c.font         = `600 10px "IBM Plex Sans",sans-serif`;
+          c.textAlign    = 'center';
+          c.textBaseline = 'bottom';
+          const top = Math.max(val[0], val[1]);
+          c.fillText(lbl, meta.data[i].x, y.getPixelForValue(top) - 3);
+        });
+      });
+      c.restore();
+    }
+  };
+
+  wfChart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels: baseSteps.map(s => s.label), datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a2332',
+          titleColor: '#fff',
+          bodyColor: '#c8d8f0',
+          padding: 10,
+          cornerRadius: 6,
+          callbacks: {
+            title: a => baseSteps[a[0].dataIndex].label,
+            label: tc => {
+              const steps = (tc.datasetIndex === 0 ? baseSteps : (scenSteps || baseSteps));
+              const st = steps[tc.dataIndex];
+              const v  = Math.abs(st.value);
+              const sg = (st.type === 'base' || st.type === 'total') ? '' : (st.value >= 0 ? '+' : '−');
+              const lbl = tc.datasetIndex === 0 ? '(база)' : '(сценарий)';
+              return ` ${lbl} ${sg}${v.toLocaleString('ru-RU')} млн $`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { font: { size: 10 }, color: '#6b7a92', maxRotation: 35 }
+        },
+        y: {
+          grid: { color: '#eef0f5' },
+          beginAtZero: true,
+          ticks: {
+            font: { size: 11 },
+            color: '#6b7a92',
+            callback: v => v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v
+          }
+        }
+      }
+    },
+    plugins: [valueLabelPlugin]
+  });
+}
+
 // ═══════════════════════════════════════════════
 // DEBT PANEL
 // ═══════════════════════════════════════════════
@@ -381,14 +612,14 @@ function debtCls(r){
   const v=parseFloat(r);
   if(v<2) return 'ok'; if(v<3.5) return ''; if(v<4.5) return 'mod'; return 'bad';
 }
- 
+
 function renderDebtPanel(year,scenData){
   const d=scenData||data[year], db=data[year], hasS=!!scenData;
   const nd=netDebt(d), cd=covDebt(d);
   const ndR=(nd/d.ebitda).toFixed(2), cdR=(cd/d.cov_ebitda).toFixed(2);
   const bnd=netDebt(db), bcd=covDebt(db);
   const bndR=(bnd/db.ebitda).toFixed(2), bcdR=(bcd/db.cov_ebitda).toFixed(2);
- 
+
   document.getElementById('debtGrid').innerHTML=[
     {label:'Чистый долг', val:fmtB(nd), sub:`Долг ${fmtB(d.debt)} − Кэш ${fmtB(d.cash)}`,
      scen:hasS?`База: ${fmtB(bnd)}`:null, cls:''},
@@ -404,10 +635,10 @@ function renderDebtPanel(year,scenData){
     ${c.scen?`<div class="metric-scen" style="color:#e65100;font-size:12px;margin-top:3px">${c.scen}</div>`:''}
     <div style="font-size:11px;color:#8a96a8;margin-top:4px">${c.sub}</div>
   </div>`).join('');
- 
+
   renderDebtChart(year,scenData);
 }
- 
+
 function renderDebtChart(year,scenData){
   if(debtChartObj) debtChartObj.destroy();
   const ctx=document.getElementById('debtChart').getContext('2d');
@@ -418,8 +649,8 @@ function renderDebtChart(year,scenData){
     label:String(yr), data:getVals(data[yr]),
     backgroundColor:pal[i].bg, borderColor:pal[i].br, borderWidth:1.5, borderRadius:4,
   }));
-  if(scenData&&year===2025) datasets.push({
-    label:'2025 Сценарий', data:getVals(scenData),
+  if(scenData) datasets.push({
+    label:`${year} Сценарий`, data:getVals(scenData),
     backgroundColor:'#e6510044', borderColor:'#e65100', borderWidth:2.5, borderRadius:4,
   });
   debtChartObj=new Chart(ctx,{type:'bar',data:{labels,datasets},options:{
@@ -432,7 +663,7 @@ function renderDebtChart(year,scenData){
             y:{grid:{color:'#eef0f5'},ticks:{font:{size:11},color:'#6b7a92',
                callback:v=>v>=1000?(v/1000).toFixed(0)+'k':v}}}}});
 }
- 
+
 // ═══════════════════════════════════════════════
 // TREND CHART
 // ═══════════════════════════════════════════════
@@ -459,7 +690,7 @@ function renderTrend(year,scenData){
             y:{grid:{color:'#eef0f5'},ticks:{font:{size:11},color:'#6b7a92',
                callback:v=>(v/1000).toFixed(0)+'k'}}}}});
 }
- 
+
 // ═══════════════════════════════════════════════
 // METRICS CARDS
 // ═══════════════════════════════════════════════
@@ -486,9 +717,9 @@ function renderMetrics(year,scenData){
       <div style="font-size:11px;color:#8a96a8;margin-top:4px">${c.sub}</div>
     </div>`).join('');
 }
- 
+
 // ═══════════════════════════════════════════════
-// ANNOTATIONS  — Q2 = OCF (not OCF-CAPEX)
+// ANNOTATIONS
 // ═══════════════════════════════════════════════
 function renderAnnotations(year,scenData){
   const d=data[year], s=scenData;
@@ -516,7 +747,7 @@ function renderAnnotations(year,scenData){
     </div>`;
   }).join('');
 }
- 
+
 // ═══════════════════════════════════════════════
 // FORM APPLY / RESET
 // ═══════════════════════════════════════════════
@@ -541,9 +772,16 @@ function applyScenario(){
   document.getElementById('scenLabel').textContent=
     `✓ Сценарий активен · ${instrs.length} инстр. · ${activeYear}`;
 }
- 
+
 function resetScenario(){
-  activeScenario=null;
+  activeScenario = null;
+  // Restore URL scenario if it was loaded for this year, otherwise full reset
+  const urlHasThisYear = urlScenarioData !== null;
+  if (urlHasThisYear) {
+    // Keep URL scenario active if user just wants to reset manual instruments
+    activeScenario = null;
+    urlScenarioData = null;
+  }
   renderWaterfall(activeYear);
   renderAnnotations(activeYear,null);
   renderMetrics(activeYear,null);
@@ -552,7 +790,7 @@ function resetScenario(){
   document.getElementById('calcResult').classList.remove('show');
   document.getElementById('scenLabel').textContent='';
 }
- 
+
 // ═══════════════════════════════════════════════
 // PDF EXPORT
 // ═══════════════════════════════════════════════
@@ -589,32 +827,39 @@ async function exportPDF(){
   }catch(e){console.error(e);alert('Ошибка PDF: '+e.message);}
   ov.classList.remove('show');
 }
- 
+
 // ═══════════════════════════════════════════════
 // TABS
 // ═══════════════════════════════════════════════
-function showYear(year,el){
+function showYear(year, el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  activeYear=year; activeScenario=null;
+  activeYear = year;
+  // Don't wipe URL scenario when switching tabs — only wipe manual scenario
+  activeScenario = urlScenarioData || null;
   document.getElementById('calcResult').classList.remove('show');
-  document.getElementById('scenLabel').textContent='';
-  renderWaterfall(year);
-  renderMetrics(year,null);
-  renderAnnotations(year,null);
-  renderDebtPanel(year,null);
-  renderTrend(null,null);
+  document.getElementById('scenLabel').textContent = '';
+  renderWaterfall(year, activeScenario);
+  renderMetrics(year, activeScenario);
+  renderAnnotations(year, activeScenario);
+  renderDebtPanel(year, activeScenario);
+  renderTrend(activeScenario ? year : null, activeScenario);
 }
- 
+
 // ═══════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════
 addRow({type:'credit',amount:500,rate:15,months:12,tax:25});
-renderWaterfall(2025);
-renderMetrics(2025,null);
-renderAnnotations(2025,null);
-renderDebtPanel(2025,null);
-renderTrend(null,null);
+
+// 1. Parse URL params and optionally inject data / scenario
+loadFromUrl();
+
+// 2. Initial render
+renderWaterfall(activeYear, activeScenario);
+renderMetrics(activeYear, activeScenario);
+renderAnnotations(activeYear, activeScenario);
+renderDebtPanel(activeYear, activeScenario);
+renderTrend(activeScenario ? activeYear : null, activeScenario);
 </script>
 </body>
 </html>
