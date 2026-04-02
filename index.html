@@ -164,6 +164,31 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
   .btn-del {
     grid-column: span 2;                      /* кнопка удаления на всю ширину */
   }
+/* Форма сценария — вертикально на мобильных, чтобы подписи были прямо над полями */
+  .instr-hdr {
+    display: none; /* убираем оторванную шапку */
+  }
+  
+  .instr-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+    background: #f8faff;
+    border: 1.5px solid #d0d8e8;
+    border-radius: 12px;
+  }
+  
+  .instr-row select,
+  .instr-row input {
+    width: 100%;
+    font-size: 15px;
+  }
+  
+  .btn-del {
+    margin-top: 8px;
+    justify-self: start;
+  }
+
 </style>
 </head>
 <body>
