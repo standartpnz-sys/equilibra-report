@@ -110,6 +110,77 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 #pdfBox p{font-size:13px;color:#6b7a92;margin-bottom:20px}
 .spinner{width:36px;height:36px;border:4px solid #d0d8e8;border-top-color:#1a3a6b;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
 @keyframes spin{to{transform:rotate(360deg)}}
+/* ====================== МОБИЛЬНАЯ АДАПТАЦИЯ ====================== */
+@media (max-width: 768px) {
+  body { padding: 16px 12px; }
+  
+  .page-header h1 { font-size: 22px; }
+  .chart-wrap { height: 380px !important; }
+  
+  /* Метрики — 2 в ряд вместо 4 */
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  
+  /* Водопад */
+  .chart-card { padding: 20px 16px; }
+  
+  /* Блок сценария — полностью вертикальный */
+  .scenario-card { padding: 20px 16px; }
+  
+  .instr-hdr { display: none; } /* прячем шапку таблицы */
+  
+  .instr-row {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .instr-row select,
+  .instr-row input {
+    width: 100%;
+  }
+  
+  /* Подписи под каждым полем */
+  .instr-row input,
+  .instr-row select {
+    padding: 10px 12px;
+  }
+  
+  /* Добавляем подписи */
+  .instr-row::before {
+    content: attr(data-labels);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    font-size: 11px;
+    color: #8a96a8;
+    margin-bottom: 8px;
+  }
+  
+  /* Форма действий — кнопки в столбик */
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  
+  .btn { padding: 14px; font-size: 14px; }
+  
+  /* Долговые метрики — тоже 2 в ряд */
+  .debt-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  
+  /* Аннотации */
+  .annotations { flex-direction: column; }
+  .ann-item { min-width: 100%; max-width: 100%; }
+  
+  /* Тренд */
+  .chart-wrap[style*="320px"] { height: 280px !important; }
+}
+
+/* Специально для полей инструментов — добавляем data-labels */
+.instr-row:nth-child(1) { --labels: "Тип инструмента" "Сумма, млн $"; }
+.instr-row:nth-child(2) { --labels: "Ставка, %" "Срок, мес."; }
+.instr-row:nth-child(3) { --labels: "Налог, %" ""; }
 </style>
 </head>
 <body>
@@ -353,14 +424,16 @@ function addRow(def={}) {
   const id = ++rowCounter;
   const opts = TYPES.map(t=>`<option value="${t.v}"${def.type===t.v?' selected':''}>${t.l}</option>`).join('');
   const div = document.createElement('div');
-  div.className='instr-row'; div.dataset.rid=id;
-  div.innerHTML=`
+  div.className='instr-row'; 
+  div.dataset.rid = id;
+  div.innerHTML = `
     <select>${opts}</select>
-    <input type="number" value="${def.amount||500}" min="1">
-    <input type="number" value="${def.rate||15}" step="0.1">
-    <input type="number" value="${def.months||12}" min="1" max="360">
-    <input type="number" value="${def.tax||25}" step="0.5">
-    <button class="btn-del" onclick="delRow(${id})">×</button>`;
+    <input type="number" value="${def.amount||500}" min="1" placeholder="Сумма">
+    <input type="number" value="${def.rate||15}" step="0.1" placeholder="Ставка %">
+    <input type="number" value="${def.months||12}" min="1" max="360" placeholder="Срок, мес.">
+    <input type="number" value="${def.tax||25}" step="0.5" placeholder="Налог %">
+    <button class="btn-del" onclick="delRow(${id})">×</button>
+  `;
   document.getElementById('instrList').appendChild(div);
 }
 
