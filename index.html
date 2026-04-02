@@ -105,27 +105,19 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 #placeholder code{display:inline-block;margin-top:12px;background:#1a2332;color:#7be3a1;
   font-size:12px;padding:10px 18px;border-radius:8px;text-align:left;line-height:1.8}
 
- /* ── MOBILE ADAPTATION ── */
+/* ── MOBILE ADAPTATION ── */
 @media (max-width: 768px) {
   body { padding: 16px 12px; }
-  
+ 
   .metrics-grid,
   .debt-grid { 
     grid-template-columns: repeat(2, 1fr); 
     gap: 12px; 
   }
-
+  
   .chart-card { 
     padding: 20px 16px; 
     margin-bottom: 16px; 
-  }
-  
-  .instr-hdr,
-  .instr-row { 
-    grid-template-columns: 140px 80px 60px 60px 60px 30px; 
-    font-size: 11px; 
-    padding: 8px 10px; 
-    overflow-x: auto; 
   }
   
   .ann-item { 
@@ -142,17 +134,13 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
   
   .page-header h1 { font-size: 22px; }
 
- /* ── ФОРМА СЦЕНАРИЯ — делаем в 2 строки + вертикально на очень узких ── */
-  .instr-hdr {
-    grid-template-columns: 1fr 1fr;           /* заголовок тоже в 2 колонки */
-    font-size: 10px;
-    padding: 6px 10px;
-  }
-  
+  /* ── ФОРМА СЦЕНАРИЯ — теперь в 2 строки ── */
+  .instr-hdr,
   .instr-row {
-    grid-template-columns: 1fr 1fr;           /* 2 строки по 3 поля */
+    grid-template-columns: 1fr 1fr;           /* 2 колонки */
     gap: 10px;
     padding: 12px 10px;
+    font-size: 11px;
   }
   
   .instr-row select,
@@ -162,7 +150,7 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
   }
   
   .btn-del {
-    grid-column: span 2;                      /* кнопка удаления на всю ширину */
+    grid-column: span 2;                      /* кнопка × на всю ширину */
   }
 }
  
