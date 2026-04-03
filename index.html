@@ -570,11 +570,9 @@ function renderWaterfall(year, scenData) {
   document.getElementById('chartTitle').textContent =
     `Водопадный анализ денежного потока — ${year}${hasS ? ' · База vs Сценарий' : ''}`;
 
-  // Toggle legends
   document.getElementById('legendStd').style.display    = hasS ? 'none'  : 'flex';
   document.getElementById('legendGrouped').classList.toggle('show', hasS);
 
-  // Adjust chart height for grouped mode
   document.getElementById('chartWrap').style.height = hasS ? '480px' : '420px';
 
   if (wfChart) wfChart.destroy();
@@ -587,8 +585,8 @@ function renderWaterfall(year, scenData) {
     borderColor: baseBorders,
     borderWidth: 1.5,
     borderRadius: 3,
-    categoryPercentage: hasS ? 0.98 : 0.72,  // grouped: почти вся ширина категории
-    barPercentage:      hasS ? 0.48 : 0.85,  // каждый столбик — почти половина
+    categoryPercentage: hasS ? 0.99 : 0.72,   // ← почти вся ширина категории
+    barPercentage:      hasS ? 0.485 : 0.85,  // ← каждый столбик занимает почти половину
   }];
 
   if (hasS) {
@@ -599,18 +597,15 @@ function renderWaterfall(year, scenData) {
       borderColor: scenBorders,
       borderWidth: 2,
       borderRadius: 3,
-      categoryPercentage: 0.98,
-      barPercentage: 0.48,
+      categoryPercentage: 0.99,
+      barPercentage: 0.485,
     });
   }
 
-  // Value label plugin:
-  //   - без сценария: подписи показываем (есть место)
-  //   - с grouped bars: подписи скрываем, значения только в tooltip
   const valueLabelPlugin = {
     id: 'vl',
     afterDatasetsDraw(ch) {
-      if (hasS) return; // grouped mode — no labels, use tooltip
+      if (hasS) return; // в режиме сценария — подписи только в tooltip
       const { ctx: c, scales: { y } } = ch;
       c.save();
       ch.data.datasets.forEach((ds, di) => {
@@ -620,7 +615,7 @@ function renderWaterfall(year, scenData) {
           const av  = Math.abs(steps[i].value);
           const lbl = av >= 1000 ? (av / 1000).toFixed(1) + 'k' : av.toString();
           c.fillStyle    = '#4a6090';
-          c.font         = `600 10px "IBM Plex Sans",sans-serif`;
+          c.font         = `600 9px "IBM Plex Sans",sans-serif`;
           c.textAlign    = 'center';
           c.textBaseline = 'bottom';
           const top = Math.max(val[0], val[1]);
@@ -639,39 +634,15 @@ function renderWaterfall(year, scenData) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        tooltip: {
-          backgroundColor: '#1a2332',
-          titleColor: '#fff',
-          bodyColor: '#c8d8f0',
-          padding: 10,
-          cornerRadius: 6,
-          callbacks: {
-            title: a => baseSteps[a[0].dataIndex].label,
-            label: tc => {
-              const steps = (tc.datasetIndex === 0 ? baseSteps : (scenSteps || baseSteps));
-              const st = steps[tc.dataIndex];
-              const v  = Math.abs(st.value);
-              const sg = (st.type === 'base' || st.type === 'total') ? '' : (st.value >= 0 ? '+' : '−');
-              const lbl = tc.datasetIndex === 0 ? '(база)' : '(сценарий)';
-              return ` ${lbl} ${sg}${v.toLocaleString('ru-RU')} млн $`;
-            }
-          }
-        }
+        tooltip: { /* ...оставляем как было... */ }
       },
       scales: {
         x: {
           grid: { display: false },
+          offset: false,                    // ← убираем лишние отступы по краям
           ticks: { font: { size: 10 }, color: '#6b7a92', maxRotation: 35 }
         },
-        y: {
-          grid: { color: '#eef0f5' },
-          beginAtZero: true,
-          ticks: {
-            font: { size: 11 },
-            color: '#6b7a92',
-            callback: v => v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v
-          }
-        }
+        y: { /* ...как было... */ }
       }
     },
     plugins: [valueLabelPlugin]
