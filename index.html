@@ -17,7 +17,6 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 .page-header h1{font-size:26px;font-weight:700;color:#1a2332;margin-bottom:6px}
 .page-header p{font-size:13px;color:#6b7a92}
 
-/* URL scenario banner */
 .url-banner{display:none;background:linear-gradient(135deg,#1a3a6b,#2a5a9b);color:#fff;border-radius:10px;padding:14px 20px;margin-bottom:20px;max-width:1100px;margin-left:auto;margin-right:auto;align-items:center;gap:14px}
 .url-banner.show{display:flex}
 .url-banner-icon{font-size:22px;flex-shrink:0}
@@ -62,40 +61,34 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 .legend-dot{width:12px;height:12px;border-radius:2px;flex-shrink:0}
 .note{text-align:center;font-size:11px;color:#a0aab8;margin-top:6px}
 
-/* Grouped bar legend */
 #legendGrouped{display:none;gap:20px;justify-content:center;margin-top:16px;flex-wrap:wrap;align-items:center}
 #legendGrouped.show{display:flex}
 .lgnd-swatch{width:14px;height:14px;border-radius:3px;flex-shrink:0}
 
-/* Debt panel */
 .debt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
 .debt-card{background:#f8faff;border-radius:10px;padding:16px 18px;border:1.5px solid #d8e3f5;border-top:4px solid #7c4dff}
 .debt-card.ok{border-top-color:#2e7d32}
 .debt-card.mod{border-top-color:#e65100}
 .debt-card.bad{border-top-color:#c62828}
 
-/* Scenario form */
+/* ── Scenario form ──────────────────────────────────── */
 .scenario-card{background:#fff;border-radius:14px;box-shadow:0 2px 20px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:24px;max-width:1100px;margin-left:auto;margin-right:auto}
 .scenario-title{font-size:15px;font-weight:700;color:#1a2332;margin-bottom:4px}
 .scenario-subtitle{font-size:12px;color:#8a96a8;margin-bottom:16px}
-
 .instr-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
 .instr-hdr{display:grid;grid-template-columns:190px 105px 85px 80px 80px 34px;gap:8px;padding:0 14px;margin-bottom:2px}
 .instr-hdr span{font-size:10px;font-weight:700;color:#8a96a8;text-transform:uppercase;letter-spacing:.7px}
-/* Desktop: one row, all fields inline */
 .instr-row{display:grid;grid-template-columns:190px 105px 85px 80px 80px 34px;gap:8px;align-items:center;background:#f8faff;border:1.5px solid #e0e8f5;border-radius:9px;padding:10px 14px}
 .instr-row select,.instr-row input{border:1.5px solid #d0d8e8;border-radius:7px;padding:7px 10px;font-size:12px;font-family:'IBM Plex Sans',sans-serif;color:#1a2332;background:#fff;outline:none;width:100%;transition:border-color .2s}
 .instr-row select:focus,.instr-row input:focus{border-color:#1a3a6b}
 .btn-del{width:30px;height:30px;border:1.5px solid #e8d0d0;background:#fff5f5;border-radius:7px;color:#c62828;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;padding:0;font-weight:300}
 .btn-del:hover{background:#ffeaea;border-color:#c62828}
-
 .form-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px}
 .btn{padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;transition:all .2s;border:none}
 .btn-primary{background:#1a3a6b;color:#fff}.btn-primary:hover{background:#2a5a9b}
 .btn-add{background:#f0f4ff;color:#1a3a6b;border:1.5px solid #b8cbee}.btn-add:hover{background:#dde8ff}
 .btn-reset{background:transparent;color:#8a96a8;border:1.5px solid #d0d8e8}.btn-reset:hover{border-color:#c62828;color:#c62828}
 .btn-pdf{background:#fff8f0;color:#e65100;border:1.5px solid #f5c89a}.btn-pdf:hover{background:#ffe8d0}
-
 .calc-result{display:none;margin-top:16px;background:#f8faff;border:1.5px solid #d0d8e8;border-radius:10px;padding:16px 18px}
 .calc-result.show{display:block}
 .calc-result h4{font-size:13px;font-weight:700;color:#1a3a6b;margin-bottom:10px}
@@ -111,55 +104,29 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 #pdfBox p{font-size:13px;color:#6b7a92;margin-bottom:20px}
 .spinner{width:36px;height:36px;border:4px solid #d0d8e8;border-top-color:#1a3a6b;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
 @keyframes spin{to{transform:rotate(360deg)}}
-/* ── mob-field: desktop = hidden label, mobile = visible label ── */
-.mob-field{display:contents} /* on desktop: transparent wrapper, children flow in grid */
-.mob-lbl{display:none}       /* labels hidden on desktop */
 
-/* ====================== МОБИЛЬНАЯ АДАПТАЦИЯ ====================== */
+/* ── Mobile ──────────────────────────────────────────── */
 @media (max-width: 768px) {
-  body { padding: 16px 12px; }
-  .page-header h1 { font-size: 20px; }
-  .chart-wrap { height: 340px !important; }
+  body{padding:16px 12px}
+  .page-header h1{font-size:20px}
+  .chart-wrap{height:300px !important}
+  .metrics-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .debt-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .chart-card,.scenario-card{padding:18px 14px}
 
-  /* Метрики — 2 в ряд */
-  .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  /* Инструменты — вертикальный стек */
+  .instr-hdr{display:none}
+  .instr-row{grid-template-columns:1fr !important;gap:8px;padding:14px}
+  /* .field-wrap добавляется через JS на мобиле */
+  .field-wrap{display:flex;flex-direction:column;gap:3px}
+  .field-lbl{font-size:11px;font-weight:600;color:#8a96a8}
+  .instr-row input,.instr-row select{padding:10px 12px;font-size:13px}
+  .btn-del{width:100%;height:38px;font-size:14px}
 
-  /* Долговые метрики — 2 в ряд */
-  .debt-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-
-  /* Карточки */
-  .chart-card, .scenario-card { padding: 18px 14px; }
-
-  /* Инструменты — вертикальный вид */
-  .instr-hdr { display: none; }
-
-  .instr-row {
-    grid-template-columns: 1fr !important;
-    gap: 0;
-    padding: 14px;
-  }
-
-  /* Показываем mob-field как block, label над полем */
-  .mob-field { display: flex; flex-direction: column; gap: 3px; margin-bottom: 10px; }
-  .mob-lbl   { display: block; font-size: 11px; font-weight: 600; color: #8a96a8; padding-left: 2px; }
-
-  .instr-row .instr-select { margin-bottom: 12px; width: 100%; }
-  .instr-row input { width: 100%; padding: 10px 12px; font-size: 13px; }
-
-  /* Кнопка удаления — справа внизу */
-  .btn-del { width: 100%; height: 36px; margin-top: 4px; font-size: 14px; }
-
-  /* Кнопки действий — столбиком */
-  .form-actions { flex-direction: column; align-items: stretch; gap: 10px; }
-  .btn { padding: 14px; font-size: 14px; }
-
-  /* Аннотации */
-  .annotations { flex-direction: column; }
-  .ann-item { min-width: 100%; max-width: 100%; }
-}
-
-@media (max-width: 480px) {
-  .metrics-grid { grid-template-columns: 1fr 1fr; }
+  .form-actions{flex-direction:column;align-items:stretch;gap:10px}
+  .btn{padding:14px;font-size:14px}
+  .annotations{flex-direction:column}
+  .ann-item{min-width:100%;max-width:100%}
 }
 </style>
 </head>
@@ -181,7 +148,6 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
   <p>Раскрываемая консолидированная финансовая отчётность по МСФО · млн долл. США</p>
 </div>
 
-<!-- URL scenario banner -->
 <div class="url-banner" id="urlBanner">
   <div class="url-banner-icon">🔗</div>
   <div class="url-banner-text">
@@ -204,19 +170,17 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
   <div class="chart-subtitle">От выручки до FCF · млн долл. США</div>
   <div class="chart-wrap" id="chartWrap" style="height:420px"><canvas id="waterfallChart"></canvas></div>
 
-  <!-- Standard legend (no scenario) -->
   <div class="legend-row" id="legendStd">
-    <div class="legend-item"><div class="legend-dot" style="background:#5c85c8"></div>Итоговый показатель</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#e57373"></div>Вычет (расход)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#66bb6a"></div>Прибавление</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#5c85c888"></div>Итоговый показатель</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e5737388"></div>Вычет (расход)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#66bb6a88"></div>Прибавление</div>
   </div>
 
-  <!-- Grouped legend (scenario active) -->
   <div id="legendGrouped">
     <span style="font-size:12px;font-weight:600;color:#1a2332;margin-right:4px">Базовый:</span>
-    <div class="legend-item"><div class="lgnd-swatch" style="background:#5c85c8"></div>Итого</div>
-    <div class="legend-item"><div class="lgnd-swatch" style="background:#e57373"></div>Расход</div>
-    <div class="legend-item"><div class="lgnd-swatch" style="background:#66bb6a"></div>Приход</div>
+    <div class="legend-item"><div class="lgnd-swatch" style="background:#5c85c888"></div>Итого</div>
+    <div class="legend-item"><div class="lgnd-swatch" style="background:#e5737388"></div>Расход</div>
+    <div class="legend-item"><div class="lgnd-swatch" style="background:#66bb6a88"></div>Приход</div>
     <span style="font-size:12px;font-weight:600;color:#e65100;margin-left:14px;margin-right:4px">Сценарий:</span>
     <div class="legend-item"><div class="lgnd-swatch" style="background:#7c4dff"></div>Итого</div>
     <div class="legend-item"><div class="lgnd-swatch" style="background:#ff7043"></div>Расход</div>
@@ -228,7 +192,6 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 
 <div class="annotations" id="annotations"></div>
 
-<!-- Debt metrics panel -->
 <div class="chart-card" id="debtCard">
   <div class="chart-title">Долговые метрики и ковенанты</div>
   <div class="chart-subtitle">Чистый долг = Долг − Денежные средства · Ковенантный долг = Долг без аренды − Кэш · млн долл. США</div>
@@ -236,18 +199,13 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
   <div class="chart-wrap" style="height:260px"><canvas id="debtChart"></canvas></div>
 </div>
 
-<!-- Scenario -->
 <div class="scenario-card">
   <div class="scenario-title">🔧 Сценарный анализ — финансовые инструменты</div>
-  <div class="scenario-subtitle">Добавьте несколько инструментов — система суммирует их влияние и обновит все показатели</div>
+  <div class="scenario-subtitle">Добавьте инструменты — система суммирует их влияние и обновит все показатели</div>
 
   <div class="instr-hdr">
-    <span>Тип инструмента</span>
-    <span>Сумма, млн $</span>
-    <span>Ставка, %</span>
-    <span>Срок, мес.</span>
-    <span>Налог, %</span>
-    <span></span>
+    <span>Тип инструмента</span><span>Сумма, млн $</span><span>Ставка, %</span>
+    <span>Срок, мес.</span><span>Налог, %</span><span></span>
   </div>
   <div class="instr-list" id="instrList"></div>
 
@@ -265,7 +223,6 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
   </div>
 </div>
 
-<!-- Trend chart -->
 <div class="chart-card">
   <div class="chart-title">Динамика ключевых метрик 2023–2025</div>
   <div class="chart-subtitle">При активном сценарии показатели выбранного года обновляются поверх базовых значений (оранжевый)</div>
@@ -275,9 +232,9 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 </div><!-- #mainContent -->
 
 <script>
-// ═══════════════════════════════════════════════
-// DATA — base values for all 3 years
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
 const data = {
   2025:{ revenue:13763, cogs_cash:5673, admin:1146, commercial:295,
          da:1411, ebitda:5668, tax:353, wc_change:489, ocf:6018,
@@ -288,25 +245,23 @@ const data = {
          capex:2386, interest_paid:1468, fcf:579,  ebitda_margin:41.5,
          debt:9946,  cash:1822, leases:462, cov_ebitda:5740 },
   2023:{ revenue:14409, cogs_cash:5311, admin:983,  commercial:273,
-         da:1165, ebitda:6884, tax:1164,wc_change:-192, ocf:5728,
+         da:1165, ebitda:6884, tax:1164, wc_change:-192, ocf:5728,
          capex:2988, interest_paid:791,  fcf:1949, ebitda_margin:47.8,
          debt:9712,  cash:2139, leases:520, cov_ebitda:7242 },
 };
 
-const netDebt  = d => d.debt - d.cash;
-const covDebt  = d => (d.debt - d.leases) - d.cash;
-const fmtB     = v => `$${(v/1000).toFixed(1)}B`;
-const fmtB2    = v => `$${(v/1000).toFixed(2)}B`;
+const netDebt = d => d.debt - d.cash;
+const covDebt = d => (d.debt - d.leases) - d.cash;
+const fmtB    = v => `$${(v/1000).toFixed(1)}B`;
+const fmtB2   = v => `$${(v/1000).toFixed(2)}B`;
 
 let wfChart=null, debtChartObj=null, trendChartObj=null;
 let activeYear=2025, activeScenario=null, rowCounter=0;
-let urlScenarioData=null; // scenario loaded from URL (bot-injected)
+let urlScenarioData=null;
 
-// ═══════════════════════════════════════════════
-// URL LOADER — reads ?company=...&data=JSON
-// Supports: { "2025": {...} }  or
-//           { "2025": {...}, "2025_scenario": {...} }
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
+// URL LOADER
+// ═══════════════════════════════════════════════════════════════
 function loadFromUrl() {
   try {
     const params = new URLSearchParams(window.location.search);
@@ -314,95 +269,63 @@ function loadFromUrl() {
 
     const company = params.get('company') || 'ПАО ГМК «Норильский никель»';
     const rawData = JSON.parse(decodeURIComponent(params.get('data')));
-
-    // Detect year keys like "2025", "2024", "2023"
     const yearKeys = Object.keys(rawData).filter(k => /^\d{4}$/.test(k));
     if (!yearKeys.length) return;
 
-    // Merge incoming base data into our data object
     yearKeys.forEach(yr => {
       const y = parseInt(yr);
-      if (rawData[yr] && typeof rawData[yr] === 'object') {
-        // Merge: keep existing fields, override with incoming
+      if (rawData[yr] && typeof rawData[yr] === 'object')
         data[y] = Object.assign({}, data[y] || {}, rawData[yr]);
-      }
     });
 
-    // Check for scenario key, e.g. "2025_scenario"
-    let scenYear = null, scenPayload = null;
+    let scenYear=null, scenPayload=null;
     for (const k of Object.keys(rawData)) {
       const m = k.match(/^(\d{4})_scenario$/);
-      if (m) {
-        scenYear = parseInt(m[1]);
-        scenPayload = Object.assign({}, data[scenYear] || {}, rawData[k]);
-        break;
-      }
+      if (m) { scenYear=parseInt(m[1]); scenPayload=Object.assign({},data[scenYear]||{},rawData[k]); break; }
     }
 
-    // Update company tag
     document.getElementById('companyTag').textContent = company;
 
-    // Switch to the first year in the payload
     const firstYear = parseInt(yearKeys[0]);
     activeYear = firstYear;
 
-    // Highlight the correct tab (or add tab if missing)
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    let tabFound = false;
+    let tabFound=false;
     document.querySelectorAll('.tab').forEach(t => {
-      if (parseInt(t.textContent) === firstYear) {
-        t.classList.add('active');
-        tabFound = true;
-      }
+      if (parseInt(t.textContent)===firstYear) { t.classList.add('active'); tabFound=true; }
     });
     if (!tabFound) {
-      // Year not in default tabs — add it
-      const tab = document.createElement('div');
-      tab.className = 'tab active';
-      tab.textContent = firstYear;
-      tab.onclick = function(){ showYear(firstYear, this); };
+      const tab=document.createElement('div');
+      tab.className='tab active'; tab.textContent=firstYear;
+      tab.onclick=function(){ showYear(firstYear,this); };
       document.getElementById('yearTabs').prepend(tab);
     }
 
-    // Show banner
-    const banner = document.getElementById('urlBanner');
+    const banner=document.getElementById('urlBanner');
     banner.classList.add('show');
-    document.getElementById('urlBannerTitle').textContent = company;
-    if (scenPayload) {
-      document.getElementById('urlBannerSub').textContent =
-        `Получен сценарный анализ за ${scenYear} г. — сравнение «базовый vs сценарий» активно`;
-    } else {
-      document.getElementById('urlBannerSub').textContent =
-        `Данные за ${yearKeys.join(', ')} г. загружены из EquiLibra Bot`;
-    }
+    document.getElementById('urlBannerTitle').textContent=company;
+    document.getElementById('urlBannerSub').textContent=scenPayload
+      ? `Получен сценарный анализ за ${scenYear} г. — сравнение «базовый vs сценарий» активно`
+      : `Данные за ${yearKeys.join(', ')} г. загружены из EquiLibra Bot`;
 
-    // Store URL scenario if present
-    if (scenPayload) {
-      urlScenarioData = scenPayload;
-      activeScenario  = scenPayload;
+    if (scenPayload) { urlScenarioData=scenPayload; activeScenario=scenPayload; }
+
+    // Автозаполнение инструментов из бота
+    if (rawData.instruments && Array.isArray(rawData.instruments) && rawData.instruments.length>0) {
+      document.getElementById('instrList').innerHTML=''; // сброс дефолтного ряда
+      rawData.instruments.forEach(instr => addRow(instr));
+      setTimeout(() => applyScenario(), 300);
     }
-      // Автозаполнение инструментов из сценария бота
-    if (rawData.instruments && Array.isArray(rawData.instruments)) {
-      rawData.instruments.forEach(instr => {
-        addRow(instr);
-      });
-      // Автоматически применяем сценарий
-      setTimeout(() => {
-        applyScenario();
-      }, 300);
-    }
-  } catch(e) {
-    console.warn('loadFromUrl error:', e);
-  }
+  } catch(e) { console.warn('loadFromUrl error:', e); }
 }
 
 function dismissUrlBanner() {
   document.getElementById('urlBanner').classList.remove('show');
 }
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // INSTRUMENT ROWS
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 const TYPES = [
   {v:'credit',  l:'Кредит (привлечение долга)'},
   {v:'bond',    l:'Облигации (выпуск)'},
@@ -410,51 +333,57 @@ const TYPES = [
   {v:'trade',   l:'Торговый / Supply-Chain Finance'},
 ];
 
+const isMobile = () => window.innerWidth <= 768;
+
 function addRow(def={}) {
-  const id = ++rowCounter;
-  const opts = TYPES.map(t =>
-    `<option value="${t.v}"${def.type===t.v ? ' selected' : ''}>${t.l}</option>`
-  ).join('');
+  const id=++rowCounter;
+  const opts=TYPES.map(t=>`<option value="${t.v}"${def.type===t.v?' selected':''}>${t.l}</option>`).join('');
 
-  const div = document.createElement('div');
-  div.className = 'instr-row';
-  div.dataset.rid = id;
+  const div=document.createElement('div');
+  div.className='instr-row';
+  div.dataset.rid=id;
 
-  // Desktop: flat grid (type | amount | rate | months | tax | del)
-  // Mobile: via CSS override — each field gets a label via .mob-field
-  div.innerHTML = `
-    <select class="instr-select">${opts}</select>
-    <div class="mob-field"><span class="mob-lbl">Сумма, млн $</span><input type="number" value="${def.amount||500}" min="1"></div>
-    <div class="mob-field"><span class="mob-lbl">Ставка, %</span><input type="number" value="${def.rate||15}" step="0.1"></div>
-    <div class="mob-field"><span class="mob-lbl">Срок, мес.</span><input type="number" value="${def.months||12}" min="1" max="360"></div>
-    <div class="mob-field"><span class="mob-lbl">Налог, %</span><input type="number" value="${def.tax||25}" step="0.5"></div>
-    <button class="btn-del" onclick="delRow(${id})">×</button>
-  `;
+  if (isMobile()) {
+    div.innerHTML=`
+      <div class="field-wrap"><span class="field-lbl">Тип инструмента</span><select>${opts}</select></div>
+      <div class="field-wrap"><span class="field-lbl">Сумма, млн $</span><input type="number" value="${def.amount||500}" min="1"></div>
+      <div class="field-wrap"><span class="field-lbl">Ставка, %</span><input type="number" value="${def.rate||15}" step="0.1"></div>
+      <div class="field-wrap"><span class="field-lbl">Срок, мес.</span><input type="number" value="${def.months||12}" min="1" max="360"></div>
+      <div class="field-wrap"><span class="field-lbl">Налог, %</span><input type="number" value="${def.tax||25}" step="0.5"></div>
+      <button class="btn-del" onclick="delRow(${id})">× Удалить</button>`;
+  } else {
+    div.innerHTML=`
+      <select>${opts}</select>
+      <input type="number" value="${def.amount||500}" min="1">
+      <input type="number" value="${def.rate||15}" step="0.1">
+      <input type="number" value="${def.months||12}" min="1" max="360">
+      <input type="number" value="${def.tax||25}" step="0.5">
+      <button class="btn-del" onclick="delRow(${id})">×</button>`;
+  }
 
   document.getElementById('instrList').appendChild(div);
 }
-  
-function delRow(id){
+
+function delRow(id) {
   const el=document.querySelector(`[data-rid="${id}"]`);
-  if(el) el.remove();
+  if (el) el.remove();
 }
 
-function getRows(){
-  return [...document.querySelectorAll('#instrList .instr-row')].map(row=>{
-    const sel = row.querySelector('select');
-    const ins = [...row.querySelectorAll('input')];
+function getRows() {
+  return [...document.querySelectorAll('#instrList .instr-row')].map(row => {
+    const sel=row.querySelector('select');
+    const ins=[...row.querySelectorAll('input')];
     return {type:sel.value, amount:+ins[0].value||0, rate:+ins[1].value||0,
             months:+ins[2].value||12, tax:+ins[3].value||25};
   });
 }
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // SCENARIO CALCULATOR
-// ═══════════════════════════════════════════════
-function calcOne(s, {type,amount,rate,months,tax:tp}){
-  const rf=rate/100, tf=tp/100, fr=months/12;
-  const lines=[];
-  if(type==='credit'||type==='bond'){
+// ═══════════════════════════════════════════════════════════════
+function calcOne(s, {type,amount,rate,months,tax:tp}) {
+  const rf=rate/100, tf=tp/100, fr=months/12, lines=[];
+  if (type==='credit'||type==='bond') {
     const gI=amount*rf*fr, sh=gI*tf;
     s.debt+=amount; s.cash+=amount;
     s.interest_paid+=gI; s.tax=Math.max(0,s.tax-sh); s.ocf+=sh;
@@ -462,13 +391,13 @@ function calcOne(s, {type,amount,rate,months,tax:tp}){
     const tn=type==='credit'?'Кредит':'Облигации';
     lines.push({l:`[${tn}] +Долг`,v:+amount,g:1},{l:`[${tn}] Проц. брутто`,v:-gI,g:-1},
                {l:`[${tn}] Налог. щит`,v:+sh,g:1},{l:`[${tn}] ∆FCF`,v:s.fcf-data[activeYear].fcf,g:Math.sign(s.fcf-data[activeYear].fcf)});
-  } else if(type==='deposit'){
+  } else if (type==='deposit') {
     const gI=amount*rf*fr, tI=gI*tf, nI=gI-tI;
     s.cash-=amount; s.tax+=tI; s.ocf+=nI;
     s.fcf=s.ocf-s.capex-s.interest_paid;
     lines.push({l:'[Депозит] −Кэш',v:-amount,g:-1},{l:'[Депозит] Доход нетто',v:+nI,g:1},
                {l:'[Депозит] ∆FCF',v:s.fcf-data[activeYear].fcf,g:Math.sign(s.fcf-data[activeYear].fcf)});
-  } else if(type==='trade'){
+  } else if (type==='trade') {
     const fee=amount*rf*fr, fsh=fee*tf, nf=fee-fsh;
     s.wc_change+=amount; s.ocf+=amount; s.interest_paid+=nf;
     s.fcf=s.ocf-s.capex-s.interest_paid;
@@ -478,281 +407,210 @@ function calcOne(s, {type,amount,rate,months,tax:tp}){
   return lines;
 }
 
-function calcScenario(year, instrs){
+function calcScenario(year, instrs) {
   let s={...data[year]};
   const allLines=[];
-  for(const instr of instrs){ allLines.push(...calcOne(s,instr)); }
+  for (const instr of instrs) allLines.push(...calcOne(s,instr));
   s.fcf=s.ocf-s.capex-s.interest_paid;
   return {scenData:s, lines:allLines};
 }
 
-// ═══════════════════════════════════════════════
-// WATERFALL — grouped bar chart
-//   Palette A (base):     blue total, red dec, green inc
-//   Palette B (scenario): purple total, orange dec, teal inc
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
+// WATERFALL
+// ═══════════════════════════════════════════════════════════════
 const PAL_BASE = {
-  total:  { bg:'#5c85c888', br:'#3a63a6' },   // 50% прозрачность
-  dec:    { bg:'#e5737388', br:'#c62828' },
-  inc:    { bg:'#66bb6a88', br:'#2e7d32' },
+  total:{bg:'#5c85c888',br:'#3a63a6'},
+  dec:  {bg:'#e5737388',br:'#c62828'},
+  inc:  {bg:'#66bb6a88',br:'#2e7d32'},
 };
-
 const PAL_SCEN = {
-  total:  { bg:'#5c85c8', br:'#3a63a6' },     // яркие, как раньше
-  dec:    { bg:'#e57373', br:'#c62828' },
-  inc:    { bg:'#66bb6a', br:'#2e7d32' },
+  total:{bg:'#7c4dff',br:'#5a2d9a'},
+  dec:  {bg:'#ff7043',br:'#bf360c'},
+  inc:  {bg:'#26a69a',br:'#00695c'},
 };
 
 function buildWFSteps(src) {
-  const d = typeof src === 'object' ? src : data[src];
+  const d=typeof src==='object'?src:data[src];
   return [
-    { label:'Выручка',               value: d.revenue,       type:'base'  },
-    { label:'Себест. (без D&A)*',    value:-d.cogs_cash,     type:'dec'   },
-    { label:'Адм. расх. (без D&A)*', value:-d.admin,         type:'dec'   },
-    { label:'Ком. расх. (без D&A)*', value:-d.commercial,    type:'dec'   },
-    { label:'EBITDA',                value: d.ebitda,        type:'total' },
-    { label:'Налог на прибыль',      value:-d.tax,           type:'dec'   },
-    { label:'Изм. ЧОК (OPEX)',       value: d.wc_change,     type: d.wc_change >= 0 ? 'inc' : 'dec' },
-    { label:'OCF',                   value: d.ocf,           type:'total' },
-    { label:'CAPEX',                 value:-d.capex,         type:'dec'   },
-    { label:'Проц. расходы',         value:-d.interest_paid, type:'dec'   },
-    { label:"FCF'",                  value: d.fcf,           type:'total' },
+    {label:'Выручка',              value: d.revenue,      type:'base'},
+    {label:'Себест. (без D&A)*',   value:-d.cogs_cash,    type:'dec'},
+    {label:'Адм. расх. (без D&A)*',value:-d.admin,        type:'dec'},
+    {label:'Ком. расх. (без D&A)*',value:-d.commercial,   type:'dec'},
+    {label:'EBITDA',               value: d.ebitda,       type:'total'},
+    {label:'Налог на прибыль',     value:-d.tax,          type:'dec'},
+    {label:'Изм. ЧОК (OPEX)',      value: d.wc_change,    type:d.wc_change>=0?'inc':'dec'},
+    {label:'OCF',                  value: d.ocf,          type:'total'},
+    {label:'CAPEX',                value:-d.capex,        type:'dec'},
+    {label:'Проц. расходы',        value:-d.interest_paid,type:'dec'},
+    {label:"FCF'",                 value: d.fcf,          type:'total'},
   ];
 }
 
 function stepsToFloating(steps) {
-  // returns array of [start, end] for each bar
-  let run = 0;
+  let run=0;
   return steps.map(s => {
-    if (s.type === 'base' || s.type === 'total') {
-      const r = [0, s.value];
-      run = s.value;
-      return r;
-    } else if (s.value >= 0) {
-      const r = [run, run + s.value];
-      run += s.value;
-      return r;
-    } else {
-      const r = [run + s.value, run];
-      run += s.value;
-      return r;
-    }
+    if (s.type==='base'||s.type==='total') { const r=[0,s.value]; run=s.value; return r; }
+    else if (s.value>=0)                   { const r=[run,run+s.value]; run+=s.value; return r; }
+    else                                   { const r=[run+s.value,run]; run+=s.value; return r; }
   });
 }
 
 function renderWaterfall(year, scenData) {
-  const hasS = !!scenData;
-  const baseSteps = buildWFSteps(year);
-  const scenSteps = hasS ? buildWFSteps(scenData) : null;
+  const hasS=!!scenData;
+  const baseSteps=buildWFSteps(year);
+  const scenSteps=hasS?buildWFSteps(scenData):null;
+  const baseFloating=stepsToFloating(baseSteps);
+  const scenFloating=hasS?stepsToFloating(scenSteps):null;
 
-  const baseFloating = stepsToFloating(baseSteps);
-  const scenFloating = hasS ? stepsToFloating(scenSteps) : null;
+  const col=(steps,pal)=>steps.map(s=>s.type==='base'||s.type==='total'?pal.total.bg:s.value>=0?pal.inc.bg:pal.dec.bg);
+  const brd=(steps,pal)=>steps.map(s=>s.type==='base'||s.type==='total'?pal.total.br:s.value>=0?pal.inc.br:pal.dec.br);
+  const baseColors=col(baseSteps,PAL_BASE), baseBorders=brd(baseSteps,PAL_BASE);
+  const scenColors=hasS?col(scenSteps,PAL_SCEN):[];
+  const scenBorders=hasS?brd(scenSteps,PAL_SCEN):[];
 
-  // Color arrays
-  const baseColors = baseSteps.map(s =>
-    s.type === 'base' || s.type === 'total' ? PAL_BASE.total.bg :
-    s.value >= 0 ? PAL_BASE.inc.bg : PAL_BASE.dec.bg
-  );
-  const baseBorders = baseSteps.map(s =>
-    s.type === 'base' || s.type === 'total' ? PAL_BASE.total.br :
-    s.value >= 0 ? PAL_BASE.inc.br : PAL_BASE.dec.br
-  );
-
-  const scenColors  = hasS ? scenSteps.map(s =>
-    s.type === 'base' || s.type === 'total' ? PAL_SCEN.total.bg :
-    s.value >= 0 ? PAL_SCEN.inc.bg : PAL_SCEN.dec.bg
-  ) : [];
-  const scenBorders = hasS ? scenSteps.map(s =>
-    s.type === 'base' || s.type === 'total' ? PAL_SCEN.total.br :
-    s.value >= 0 ? PAL_SCEN.inc.br : PAL_SCEN.dec.br
-  ) : [];
-
-  document.getElementById('chartTitle').textContent =
-    `Водопадный анализ денежного потока — ${year}${hasS ? ' · База vs Сценарий' : ''}`;
-
-  // Toggle legends
-  document.getElementById('legendStd').style.display    = hasS ? 'none'  : 'flex';
-  document.getElementById('legendGrouped').classList.toggle('show', hasS);
-
-  // Adjust chart height for grouped mode (more bars)
-  document.getElementById('chartWrap').style.height = hasS ? '480px' : '420px';
+  document.getElementById('chartTitle').textContent=
+    `Водопадный анализ денежного потока — ${year}${hasS?' · База vs Сценарий':''}`;
+  document.getElementById('legendStd').style.display=hasS?'none':'flex';
+  document.getElementById('legendGrouped').classList.toggle('show',hasS);
+  document.getElementById('chartWrap').style.height=hasS?'480px':'420px';
 
   if (wfChart) wfChart.destroy();
-  const ctx = document.getElementById('waterfallChart').getContext('2d');
+  const ctx=document.getElementById('waterfallChart').getContext('2d');
 
-  const datasets = [{
-    label: `Базовый ${year}`,
-    data: baseFloating,
-    backgroundColor: baseColors,
-    borderColor: baseBorders,
-    borderWidth: 1.5,
-    borderRadius: 3,
-    // No-scenario: wider bars; with scenario: wide + almost touching (categoryPercentage near 1, barPercentage split leaves tiny gap)
-    categoryPercentage: hasS ? 0.92 : 0.72,
-    barPercentage:      hasS ? 0.49 : 0.85,
+  const datasets=[{
+    label:`Базовый ${year}`, data:baseFloating,
+    backgroundColor:baseColors, borderColor:baseBorders,
+    borderWidth:1.5, borderRadius:3,
+    categoryPercentage:hasS?0.98:0.72,   // grouped: почти вся ширина категории
+    barPercentage:hasS?0.48:0.85,        // каждый столбик ~половина → зазор 2–3 px
   }];
+  if (hasS) datasets.push({
+    label:'Сценарий', data:scenFloating,
+    backgroundColor:scenColors, borderColor:scenBorders,
+    borderWidth:2, borderRadius:3,
+    categoryPercentage:0.98, barPercentage:0.48,
+  });
 
-  if (hasS) {
-    datasets.push({
-      label: 'Сценарий',
-      data: scenFloating,
-      backgroundColor: scenColors,
-      borderColor: scenBorders,
-      borderWidth: 2,
-      borderRadius: 3,
-      categoryPercentage: 0.92,
-      barPercentage: 0.49,
-    });
-  }
-
-  // Value label plugin
-  const valueLabelPlugin = {
-    id: 'vl',
+  // Подписи только без сценария; в grouped — только tooltip
+  const valueLabelPlugin={
+    id:'vl',
     afterDatasetsDraw(ch) {
-      const { ctx: c, scales: { y } } = ch;
-      c.save();
-      const allSteps = [baseSteps, scenSteps];
-      ch.data.datasets.forEach((ds, di) => {
-        const steps = allSteps[di] || baseSteps;
-        const meta  = ch.getDatasetMeta(di);
-        ds.data.forEach((val, i) => {
-          const av  = Math.abs(steps[i].value);
-          const lbl = av >= 1000 ? (av / 1000).toFixed(1) + 'k' : av.toString();
-          c.fillStyle    = di === 0 ? '#4a6090' : '#5a2d9a';
-          c.font         = `600 10px "IBM Plex Sans",sans-serif`;
-          c.textAlign    = 'center';
-          c.textBaseline = 'bottom';
-          const top = Math.max(val[0], val[1]);
-          c.fillText(lbl, meta.data[i].x, y.getPixelForValue(top) - 3);
+      if (hasS) return;
+      const {ctx:c,scales:{y}}=ch; c.save();
+      ch.data.datasets.forEach((ds,di)=>{
+        const meta=ch.getDatasetMeta(di);
+        ds.data.forEach((val,i)=>{
+          const av=Math.abs(baseSteps[i].value);
+          const lbl=av>=1000?(av/1000).toFixed(1)+'k':av.toString();
+          c.fillStyle='#4a6090';
+          c.font='600 10px "IBM Plex Sans",sans-serif';
+          c.textAlign='center'; c.textBaseline='bottom';
+          c.fillText(lbl,meta.data[i].x,y.getPixelForValue(Math.max(val[0],val[1]))-3);
         });
       });
       c.restore();
     }
   };
 
-  wfChart = new Chart(ctx, {
-    type: 'bar',
-    data: { labels: baseSteps.map(s => s.label), datasets },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#1a2332',
-          titleColor: '#fff',
-          bodyColor: '#c8d8f0',
-          padding: 10,
-          cornerRadius: 6,
-          callbacks: {
-            title: a => baseSteps[a[0].dataIndex].label,
-            label: tc => {
-              const steps = (tc.datasetIndex === 0 ? baseSteps : (scenSteps || baseSteps));
-              const st = steps[tc.dataIndex];
-              const v  = Math.abs(st.value);
-              const sg = (st.type === 'base' || st.type === 'total') ? '' : (st.value >= 0 ? '+' : '−');
-              const lbl = tc.datasetIndex === 0 ? '(база)' : '(сценарий)';
-              return ` ${lbl} ${sg}${v.toLocaleString('ru-RU')} млн $`;
+  wfChart=new Chart(ctx,{
+    type:'bar',
+    data:{labels:baseSteps.map(s=>s.label),datasets},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:'#1a2332',titleColor:'#fff',bodyColor:'#c8d8f0',
+          padding:10,cornerRadius:6,
+          callbacks:{
+            title:a=>baseSteps[a[0].dataIndex].label,
+            label:tc=>{
+              const steps=tc.datasetIndex===0?baseSteps:(scenSteps||baseSteps);
+              const st=steps[tc.dataIndex];
+              const v=Math.abs(st.value);
+              const sg=(st.type==='base'||st.type==='total')?'':(st.value>=0?'+':'−');
+              return ` ${tc.datasetIndex===0?'(база)':'(сценарий)'} ${sg}${v.toLocaleString('ru-RU')} млн $`;
             }
           }
         }
       },
-      scales: {
-        x: {
-          grid: { display: false },
-          ticks: { font: { size: 10 }, color: '#6b7a92', maxRotation: 35 }
-        },
-        y: {
-          grid: { color: '#eef0f5' },
-          beginAtZero: true,
-          ticks: {
-            font: { size: 11 },
-            color: '#6b7a92',
-            callback: v => v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v
-          }
-        }
+      scales:{
+        x:{grid:{display:false},ticks:{font:{size:10},color:'#6b7a92',maxRotation:35}},
+        y:{grid:{color:'#eef0f5'},beginAtZero:true,
+           ticks:{font:{size:11},color:'#6b7a92',callback:v=>v>=1000?(v/1000).toFixed(0)+'k':v}}
       }
     },
-    plugins: [valueLabelPlugin]
+    plugins:[valueLabelPlugin]
   });
 }
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // DEBT PANEL
-// ═══════════════════════════════════════════════
-function debtCls(r){
-  const v=parseFloat(r);
-  if(v<2) return 'ok'; if(v<3.5) return ''; if(v<4.5) return 'mod'; return 'bad';
-}
+// ═══════════════════════════════════════════════════════════════
+function debtCls(r){const v=parseFloat(r);if(v<2)return'ok';if(v<3.5)return'';if(v<4.5)return'mod';return'bad';}
 
 function renderDebtPanel(year,scenData){
-  const d=scenData||data[year], db=data[year], hasS=!!scenData;
-  const nd=netDebt(d), cd=covDebt(d);
-  const ndR=(nd/d.ebitda).toFixed(2), cdR=(cd/d.cov_ebitda).toFixed(2);
-  const bnd=netDebt(db), bcd=covDebt(db);
-  const bndR=(bnd/db.ebitda).toFixed(2), bcdR=(bcd/db.cov_ebitda).toFixed(2);
-
+  const d=scenData||data[year],db=data[year],hasS=!!scenData;
+  const nd=netDebt(d),cd=covDebt(d);
+  const ndR=(nd/d.ebitda).toFixed(2),cdR=(cd/d.cov_ebitda).toFixed(2);
+  const bnd=netDebt(db),bcd=covDebt(db);
+  const bndR=(bnd/db.ebitda).toFixed(2),bcdR=(bcd/db.cov_ebitda).toFixed(2);
   document.getElementById('debtGrid').innerHTML=[
-    {label:'Чистый долг', val:fmtB(nd), sub:`Долг ${fmtB(d.debt)} − Кэш ${fmtB(d.cash)}`,
-     scen:hasS?`База: ${fmtB(bnd)}`:null, cls:''},
-    {label:'Ков. чистый долг', val:fmtB(cd), sub:`(Долг−Аренда ${fmtB(d.leases)}) − Кэш`,
-     scen:hasS?`База: ${fmtB(bcd)}`:null, cls:''},
-    {label:'Чист. долг / EBITDA', val:ndR+'×', sub:`EBITDA ${fmtB(d.ebitda)}`,
-     scen:hasS?`База: ${bndR}×`:null, cls:debtCls(ndR)},
-    {label:'Ков. долг / Ков. EBITDA', val:cdR+'×', sub:`Ков. EBITDA ${fmtB(d.cov_ebitda)}`,
-     scen:hasS?`База: ${bcdR}×`:null, cls:debtCls(cdR)},
+    {label:'Чистый долг',            val:fmtB(nd),  sub:`Долг ${fmtB(d.debt)} − Кэш ${fmtB(d.cash)}`,  scen:hasS?`База: ${fmtB(bnd)}`:null,cls:''},
+    {label:'Ков. чистый долг',       val:fmtB(cd),  sub:`(Долг−Аренда ${fmtB(d.leases)}) − Кэш`,       scen:hasS?`База: ${fmtB(bcd)}`:null,cls:''},
+    {label:'Чист. долг / EBITDA',    val:ndR+'×',   sub:`EBITDA ${fmtB(d.ebitda)}`,                      scen:hasS?`База: ${bndR}×`:null,cls:debtCls(ndR)},
+    {label:'Ков. долг / Ков. EBITDA',val:cdR+'×',   sub:`Ков. EBITDA ${fmtB(d.cov_ebitda)}`,             scen:hasS?`База: ${bcdR}×`:null,cls:debtCls(cdR)},
   ].map(c=>`<div class="debt-card ${c.cls}">
     <div class="metric-label">${c.label}</div>
     <div class="metric-value">${c.val}</div>
     ${c.scen?`<div class="metric-scen" style="color:#e65100;font-size:12px;margin-top:3px">${c.scen}</div>`:''}
     <div style="font-size:11px;color:#8a96a8;margin-top:4px">${c.sub}</div>
   </div>`).join('');
-
   renderDebtChart(year,scenData);
 }
 
 function renderDebtChart(year,scenData){
-  if(debtChartObj) debtChartObj.destroy();
+  if(debtChartObj)debtChartObj.destroy();
   const ctx=document.getElementById('debtChart').getContext('2d');
   const labels=['Чистый долг','Ков. чист. долг','ЧД/EBITDA (×1k)','Ков.ЧД/Ков.EBITDA (×1k)'];
   const getVals=d=>[netDebt(d),covDebt(d),(netDebt(d)/d.ebitda)*1000,(covDebt(d)/d.cov_ebitda)*1000];
   const pal=[{bg:'#7ba3d888',br:'#3a63a6'},{bg:'#66bb6a88',br:'#2e7d32'},{bg:'#5c85c888',br:'#3a63a6'}];
   const datasets=[2023,2024,2025].map((yr,i)=>({
-    label:String(yr), data:getVals(data[yr]),
-    backgroundColor:pal[i].bg, borderColor:pal[i].br, borderWidth:1.5, borderRadius:4,
+    label:String(yr),data:getVals(data[yr]),
+    backgroundColor:pal[i].bg,borderColor:pal[i].br,borderWidth:1.5,borderRadius:4,
   }));
-  if(scenData) datasets.push({
-    label:`${year} Сценарий`, data:getVals(scenData),
-    backgroundColor:'#e6510044', borderColor:'#e65100', borderWidth:2.5, borderRadius:4,
+  if(scenData)datasets.push({
+    label:`${year} Сценарий`,data:getVals(scenData),
+    backgroundColor:'#e6510044',borderColor:'#e65100',borderWidth:2.5,borderRadius:4,
   });
   debtChartObj=new Chart(ctx,{type:'bar',data:{labels,datasets},options:{
     responsive:true,maintainAspectRatio:false,
     plugins:{legend:{labels:{font:{size:12,family:'IBM Plex Sans'},color:'#1a2332'}},
       tooltip:{backgroundColor:'#1a2332',titleColor:'#fff',bodyColor:'#c8d8f0',
         callbacks:{label:tc=>{const i=tc.dataIndex,v=tc.parsed.y;
-          return ` ${tc.dataset.label}: ${i>=2?(v/1000).toFixed(2)+'×':'$'+(v/1000).toFixed(2)+'B'}`;}}}},
+          return ` ${tc.dataset.label}: ${i>=2?(v/1000).toFixed(2)+'×':'$'+(v/1000).toFixed(2)+'B'}`;
+        }}}},
     scales:{x:{grid:{display:false},ticks:{font:{size:11},color:'#6b7a92'}},
             y:{grid:{color:'#eef0f5'},ticks:{font:{size:11},color:'#6b7a92',
                callback:v=>v>=1000?(v/1000).toFixed(0)+'k':v}}}}});
 }
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // TREND CHART
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 function renderTrend(year,scenData){
-  if(trendChartObj) trendChartObj.destroy();
+  if(trendChartObj)trendChartObj.destroy();
   const ctx=document.getElementById('trendChart').getContext('2d');
-  const mLbls=['EBITDA','OCF',"FCF'"];
-  const keys=['ebitda','ocf','fcf'];
+  const mLbls=['EBITDA','OCF',"FCF'"],keys=['ebitda','ocf','fcf'];
   const pal=[{bg:'#7ba3d888',br:'#3a63a6'},{bg:'#66bb6a88',br:'#2e7d32'},{bg:'#5c85c888',br:'#3a63a6'}];
   const datasets=[2023,2024,2025].map((yr,i)=>({
-    label:String(yr), data:keys.map(k=>data[yr][k]),
-    backgroundColor:pal[i].bg, borderColor:pal[i].br, borderWidth:1.5, borderRadius:4,
+    label:String(yr),data:keys.map(k=>data[yr][k]),
+    backgroundColor:pal[i].bg,borderColor:pal[i].br,borderWidth:1.5,borderRadius:4,
   }));
-  if(scenData&&year){
-    datasets.push({label:`${year} Сценарий`,data:keys.map(k=>scenData[k]),
-      backgroundColor:'#e6510044',borderColor:'#e65100',borderWidth:2.5,borderRadius:4});
-  }
+  if(scenData&&year)datasets.push({
+    label:`${year} Сценарий`,data:keys.map(k=>scenData[k]),
+    backgroundColor:'#e6510044',borderColor:'#e65100',borderWidth:2.5,borderRadius:4,
+  });
   trendChartObj=new Chart(ctx,{type:'bar',data:{labels:mLbls,datasets},options:{
     responsive:true,maintainAspectRatio:false,
     plugins:{legend:{labels:{font:{size:12,family:'IBM Plex Sans'},color:'#1a2332'}},
@@ -763,22 +621,18 @@ function renderTrend(year,scenData){
                callback:v=>(v/1000).toFixed(0)+'k'}}}}});
 }
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // METRICS CARDS
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 function renderMetrics(year,scenData){
-  const d=data[year], pr=data[year-1]||null, s=scenData;
+  const d=data[year],pr=data[year-1]||null,s=scenData;
   const p=(a,b)=>b?((a-b)/Math.abs(b)*100).toFixed(1):null;
   const cards=[
-    {label:'EBITDA', value:fmtB(d.ebitda), delta:p(d.ebitda,pr?.ebitda),
-     type:'neutral', sub:`Маржа ${d.ebitda_margin}%`, scen:s?fmtB(s.ebitda):null},
-    {label:'OCF', value:fmtB(d.ocf), delta:p(d.ocf,pr?.ocf),
-     type:'positive', sub:'Операц. денежный поток', scen:s?fmtB(s.ocf):null},
-    {label:"FCF'", value:fmtB(d.fcf), delta:p(d.fcf,pr?.fcf),
-     type:d.fcf>0?'positive':'negative', sub:'OCF − CAPEX − Проценты', scen:s?fmtB(s.fcf):null},
-    {label:'Net Debt / EBITDA', value:(netDebt(d)/d.ebitda).toFixed(2)+'×', delta:null,
-     type:'neutral', sub:`Чист. долг ${fmtB(netDebt(d))}`,
-     scen:s?(netDebt(s)/s.ebitda).toFixed(2)+'×':null},
+    {label:'EBITDA',value:fmtB(d.ebitda),delta:p(d.ebitda,pr?.ebitda),type:'neutral',sub:`Маржа ${d.ebitda_margin}%`,scen:s?fmtB(s.ebitda):null},
+    {label:'OCF',value:fmtB(d.ocf),delta:p(d.ocf,pr?.ocf),type:'positive',sub:'Операц. денежный поток',scen:s?fmtB(s.ocf):null},
+    {label:"FCF'",value:fmtB(d.fcf),delta:p(d.fcf,pr?.fcf),type:d.fcf>0?'positive':'negative',sub:'OCF − CAPEX − Проценты',scen:s?fmtB(s.fcf):null},
+    {label:'Net Debt / EBITDA',value:(netDebt(d)/d.ebitda).toFixed(2)+'×',delta:null,type:'neutral',
+     sub:`Чист. долг ${fmtB(netDebt(d))}`,scen:s?(netDebt(s)/s.ebitda).toFixed(2)+'×':null},
   ];
   document.getElementById('metrics').innerHTML=cards.map(c=>`
     <div class="metric-card ${c.type}">
@@ -790,26 +644,20 @@ function renderMetrics(year,scenData){
     </div>`).join('');
 }
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // ANNOTATIONS
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 function renderAnnotations(year,scenData){
-  const d=data[year], s=scenData;
+  const d=data[year],s=scenData;
   const items=[
-    {metric:'EBITDA',
-     question:'Сколько денег генерирует операционная деятельность Компании?',
-     base:d.ebitda, scen:s?.ebitda},
-    {metric:'OCF',
-     question:'Сколько денег можно изъять из Компании без ущерба для операционной деятельности?',
-     base:d.ocf, scen:s?.ocf},
-    {metric:"FCF'",
-     question:'Сколько денег можно изъять без ущерба для Компании?',
-     base:d.fcf, scen:s?.fcf},
+    {metric:'EBITDA',question:'Сколько денег генерирует операционная деятельность Компании?',base:d.ebitda,scen:s?.ebitda},
+    {metric:'OCF',question:'Сколько денег можно изъять из Компании без ущерба для операционной деятельности?',base:d.ocf,scen:s?.ocf},
+    {metric:"FCF'",question:'Сколько денег можно изъять без ущерба для Компании?',base:d.fcf,scen:s?.fcf},
   ];
   document.getElementById('annotations').innerHTML=items.map(it=>{
     const hasS=s&&it.scen!==undefined;
     const delta=hasS?it.scen-it.base:null;
-    const dc=delta>=0?'dp':'dn', ds=delta>=0?'+':'';
+    const dc=delta>=0?'dp':'dn',ds=delta>=0?'+':'';
     return `<div class="ann-item">
       <div class="ann-label">${it.metric}</div>
       <div class="ann-question">${it.question}</div>
@@ -820,9 +668,9 @@ function renderAnnotations(year,scenData){
   }).join('');
 }
 
-// ═══════════════════════════════════════════════
-// FORM APPLY / RESET
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
+// APPLY / RESET SCENARIO
+// ═══════════════════════════════════════════════════════════════
 function applyScenario(){
   const instrs=getRows();
   if(!instrs.length){alert('Добавьте хотя бы один инструмент');return;}
@@ -833,27 +681,17 @@ function applyScenario(){
   renderMetrics(activeYear,scenData);
   renderDebtPanel(activeYear,scenData);
   renderTrend(activeYear,scenData);
-  const res=document.getElementById('calcResult');
-  res.classList.add('show');
-  document.getElementById('calcTitle').textContent=
-    `Совокупный эффект ${instrs.length} инструмента(ов) · год ${activeYear}`;
+  document.getElementById('calcResult').classList.add('show');
+  document.getElementById('calcTitle').textContent=`Совокупный эффект ${instrs.length} инструмента(ов) · год ${activeYear}`;
   document.getElementById('calcLines').innerHTML=lines.map(l=>{
-    const cl=l.g>0?'pos':l.g<0?'neg':'', sg=l.g>0?'+':'';
+    const cl=l.g>0?'pos':l.g<0?'neg':'',sg=l.g>0?'+':'';
     return `<div class="calc-line"><span>${l.l}</span><span class="cv ${cl}">${sg}${l.v.toFixed(1)}&nbsp;млн&nbsp;$</span></div>`;
   }).join('');
-  document.getElementById('scenLabel').textContent=
-    `✓ Сценарий активен · ${instrs.length} инстр. · ${activeYear}`;
+  document.getElementById('scenLabel').textContent=`✓ Сценарий активен · ${instrs.length} инстр. · ${activeYear}`;
 }
 
 function resetScenario(){
-  activeScenario = null;
-  // Restore URL scenario if it was loaded for this year, otherwise full reset
-  const urlHasThisYear = urlScenarioData !== null;
-  if (urlHasThisYear) {
-    // Keep URL scenario active if user just wants to reset manual instruments
-    activeScenario = null;
-    urlScenarioData = null;
-  }
+  activeScenario=null; urlScenarioData=null;
   renderWaterfall(activeYear);
   renderAnnotations(activeYear,null);
   renderMetrics(activeYear,null);
@@ -863,9 +701,9 @@ function resetScenario(){
   document.getElementById('scenLabel').textContent='';
 }
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // PDF EXPORT
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 async function exportPDF(){
   const ov=document.getElementById('pdfOverlay');
   ov.classList.add('show');
@@ -874,64 +712,55 @@ async function exportPDF(){
     const {jsPDF}=window.jspdf;
     const el=document.getElementById('mainContent');
     const canvas=await html2canvas(el,{scale:1.5,useCORS:true,backgroundColor:'#f4f6f9',logging:false});
-    const img=canvas.toDataURL('image/jpeg',0.88);
     const pdf=new jsPDF({orientation:'p',unit:'mm',format:'a4'});
-    const pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
-    const mg=10, uw=pw-mg*2;
-    const ratio=canvas.width/canvas.height;
-    const startY=13;
-    pdf.setFontSize(9); pdf.setTextColor(120,130,150);
+    const pw=pdf.internal.pageSize.getWidth(),ph=pdf.internal.pageSize.getHeight();
+    const mg=10,uw=pw-mg*2,startY=13;
+    pdf.setFontSize(9);pdf.setTextColor(120,130,150);
     pdf.text('ПАО ГМК «Норильский никель» — Анализ денежного потока МСФО',mg,7);
     pdf.text(`${new Date().toLocaleString('ru-RU')}${activeScenario?' · Сценарий':''}`,pw-mg,7,{align:'right'});
-    let yOff=0; let first=true;
+    let yOff=0,first=true;
     while(yOff<canvas.height){
-      if(!first) pdf.addPage();
+      if(!first)pdf.addPage();
       const avH=(first?ph-startY-mg:ph-mg*2)/(uw/canvas.width)*canvas.width;
       const slH=Math.min(avH,canvas.height-yOff);
       const sl=document.createElement('canvas');
-      sl.width=canvas.width; sl.height=slH;
+      sl.width=canvas.width;sl.height=slH;
       sl.getContext('2d').drawImage(canvas,0,-yOff);
-      const rH=slH*(uw/canvas.width);
-      pdf.addImage(sl.toDataURL('image/jpeg',0.88),'JPEG',mg,first?startY:mg,uw,rH);
-      yOff+=slH; first=false;
+      pdf.addImage(sl.toDataURL('image/jpeg',0.88),'JPEG',mg,first?startY:mg,uw,slH*(uw/canvas.width));
+      yOff+=slH;first=false;
     }
     pdf.save(`Nornickel_CF_${activeYear}${activeScenario?'_Scen':''}.pdf`);
   }catch(e){console.error(e);alert('Ошибка PDF: '+e.message);}
   ov.classList.remove('show');
 }
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // TABS
-// ═══════════════════════════════════════════════
-function showYear(year, el){
+// ═══════════════════════════════════════════════════════════════
+function showYear(year,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  activeYear = year;
-  // Don't wipe URL scenario when switching tabs — only wipe manual scenario
-  activeScenario = urlScenarioData || null;
+  activeYear=year;
+  activeScenario=urlScenarioData||null;
   document.getElementById('calcResult').classList.remove('show');
-  document.getElementById('scenLabel').textContent = '';
-  renderWaterfall(year, activeScenario);
-  renderMetrics(year, activeScenario);
-  renderAnnotations(year, activeScenario);
-  renderDebtPanel(year, activeScenario);
-  renderTrend(activeScenario ? year : null, activeScenario);
+  document.getElementById('scenLabel').textContent='';
+  renderWaterfall(year,activeScenario);
+  renderMetrics(year,activeScenario);
+  renderAnnotations(year,activeScenario);
+  renderDebtPanel(year,activeScenario);
+  renderTrend(activeScenario?year:null,activeScenario);
 }
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // INIT
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 addRow({type:'credit',amount:500,rate:15,months:12,tax:25});
-
-// 1. Parse URL params and optionally inject data / scenario
 loadFromUrl();
-
-// 2. Initial render
-renderWaterfall(activeYear, activeScenario);
-renderMetrics(activeYear, activeScenario);
-renderAnnotations(activeYear, activeScenario);
-renderDebtPanel(activeYear, activeScenario);
-renderTrend(activeScenario ? activeYear : null, activeScenario);
+renderWaterfall(activeYear,activeScenario);
+renderMetrics(activeYear,activeScenario);
+renderAnnotations(activeYear,activeScenario);
+renderDebtPanel(activeYear,activeScenario);
+renderTrend(activeScenario?activeYear:null,activeScenario);
 </script>
 </body>
 </html>
