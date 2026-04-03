@@ -80,9 +80,10 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 .scenario-subtitle{font-size:12px;color:#8a96a8;margin-bottom:16px}
 
 .instr-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
-.instr-hdr{display:grid;grid-template-columns:180px 110px 90px 80px 80px 34px;gap:8px;padding:0 14px;margin-bottom:2px}
+.instr-hdr{display:grid;grid-template-columns:190px 105px 85px 80px 80px 34px;gap:8px;padding:0 14px;margin-bottom:2px}
 .instr-hdr span{font-size:10px;font-weight:700;color:#8a96a8;text-transform:uppercase;letter-spacing:.7px}
-.instr-row{display:grid;grid-template-columns:180px 110px 90px 80px 80px 34px;gap:8px;align-items:center;background:#f8faff;border:1.5px solid #e0e8f5;border-radius:9px;padding:10px 14px}
+/* Desktop: one row, all fields inline */
+.instr-row{display:grid;grid-template-columns:190px 105px 85px 80px 80px 34px;gap:8px;align-items:center;background:#f8faff;border:1.5px solid #e0e8f5;border-radius:9px;padding:10px 14px}
 .instr-row select,.instr-row input{border:1.5px solid #d0d8e8;border-radius:7px;padding:7px 10px;font-size:12px;font-family:'IBM Plex Sans',sans-serif;color:#1a2332;background:#fff;outline:none;width:100%;transition:border-color .2s}
 .instr-row select:focus,.instr-row input:focus{border-color:#1a3a6b}
 .btn-del{width:30px;height:30px;border:1.5px solid #e8d0d0;background:#fff5f5;border-radius:7px;color:#c62828;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;padding:0;font-weight:300}
@@ -110,152 +111,56 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 #pdfBox p{font-size:13px;color:#6b7a92;margin-bottom:20px}
 .spinner{width:36px;height:36px;border:4px solid #d0d8e8;border-top-color:#1a3a6b;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
 @keyframes spin{to{transform:rotate(360deg)}}
+/* ── mob-field: desktop = hidden label, mobile = visible label ── */
+.mob-field{display:contents} /* on desktop: transparent wrapper, children flow in grid */
+.mob-lbl{display:none}       /* labels hidden on desktop */
+
 /* ====================== МОБИЛЬНАЯ АДАПТАЦИЯ ====================== */
 @media (max-width: 768px) {
   body { padding: 16px 12px; }
-  
-  .page-header h1 { font-size: 22px; }
-  .chart-wrap { height: 380px !important; }
-  
-  /* Метрики — 2 в ряд вместо 4 */
-  .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  
-  /* Водопад */
-  .chart-card { padding: 20px 16px; }
-  
-  /* Блок сценария — полностью вертикальный */
-  .scenario-card { padding: 20px 16px; }
-  
-  .instr-hdr { display: none; } /* прячем шапку таблицы */
-  
+  .page-header h1 { font-size: 20px; }
+  .chart-wrap { height: 340px !important; }
+
+  /* Метрики — 2 в ряд */
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+  /* Долговые метрики — 2 в ряд */
+  .debt-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+  /* Карточки */
+  .chart-card, .scenario-card { padding: 18px 14px; }
+
+  /* Инструменты — вертикальный вид */
+  .instr-hdr { display: none; }
+
   .instr-row {
     grid-template-columns: 1fr !important;
-    gap: 12px;
-    padding: 16px;
-    margin-bottom: 12px;
+    gap: 0;
+    padding: 14px;
   }
-  
-  .instr-row select,
-  .instr-row input {
-    width: 100%;
-  }
-  
-  /* Подписи под каждым полем */
-  .instr-row input,
-  .instr-row select {
-    padding: 10px 12px;
-  }
-  
-  /* Добавляем подписи */
-  .instr-row::before {
-    content: attr(data-labels);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    font-size: 11px;
-    color: #8a96a8;
-    margin-bottom: 8px;
-  }
-  
-  /* Форма действий — кнопки в столбик */
-  .form-actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-  
+
+  /* Показываем mob-field как block, label над полем */
+  .mob-field { display: flex; flex-direction: column; gap: 3px; margin-bottom: 10px; }
+  .mob-lbl   { display: block; font-size: 11px; font-weight: 600; color: #8a96a8; padding-left: 2px; }
+
+  .instr-row .instr-select { margin-bottom: 12px; width: 100%; }
+  .instr-row input { width: 100%; padding: 10px 12px; font-size: 13px; }
+
+  /* Кнопка удаления — справа внизу */
+  .btn-del { width: 100%; height: 36px; margin-top: 4px; font-size: 14px; }
+
+  /* Кнопки действий — столбиком */
+  .form-actions { flex-direction: column; align-items: stretch; gap: 10px; }
   .btn { padding: 14px; font-size: 14px; }
-  
-  /* Долговые метрики — тоже 2 в ряд */
-  .debt-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  
+
   /* Аннотации */
   .annotations { flex-direction: column; }
   .ann-item { min-width: 100%; max-width: 100%; }
-  
-  /* Тренд */
-  .chart-wrap[style*="320px"] { height: 280px !important; }
 }
 
-/* Специально для полей инструментов — добавляем data-labels */
-.instr-row:nth-child(1) { --labels: "Тип инструмента" "Сумма, млн $"; }
-.instr-row:nth-child(2) { --labels: "Ставка, %" "Срок, мес."; }
-.instr-row:nth-child(3) { --labels: "Налог, %" ""; }
-/* Мобильные поля с подписями */
-.mobile-input-group {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px 16px;
-  width: 100%;
-}
-
-.input-with-label {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.field-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: #8a96a8;
-  padding-left: 4px;
-}
-
-.input-with-label input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1.5px solid #d0d8e8;
-  border-radius: 7px;
-  font-size: 13px;
-}
-
-@media (max-width: 768px) {
-  .instr-row {
-    grid-template-columns: 1fr !important;
-    padding: 16px;
-    gap: 12px;
-  }
-  
-  .mobile-input-group {
-    grid-template-columns: 1fr;   /* на очень узких экранах — в столбик */
-  }
-}
-/* ====================== МОБИЛЬНЫЕ ПОЛЯ ИНСТРУМЕНТОВ ====================== */
-.mobile-input-group {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  width: 100%;
-}
-
-.input-with-label {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.field-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: #8a96a8;
-  padding-left: 6px;
-}
-
-.input-with-label input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1.5px solid #d0d8e8;
-  border-radius: 7px;
-  font-size: 13px;
-}
-
-/* На очень узких экранах — всё в одну колонку */
 @media (max-width: 480px) {
-  .mobile-input-group {
-    grid-template-columns: 1fr;
-  }
-}  
+  .metrics-grid { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
@@ -507,41 +412,25 @@ const TYPES = [
 
 function addRow(def={}) {
   const id = ++rowCounter;
-  const opts = TYPES.map(t => 
+  const opts = TYPES.map(t =>
     `<option value="${t.v}"${def.type===t.v ? ' selected' : ''}>${t.l}</option>`
   ).join('');
 
   const div = document.createElement('div');
   div.className = 'instr-row';
   div.dataset.rid = id;
-  
+
+  // Desktop: flat grid (type | amount | rate | months | tax | del)
+  // Mobile: via CSS override — each field gets a label via .mob-field
   div.innerHTML = `
-    <!-- Выбор типа — на всю ширину -->
-    <select style="grid-column: 1 / -1; margin-bottom: 12px;">${opts}</select>
-    
-    <!-- 4 поля с подписями слева -->
-    <div class="mobile-input-group">
-      <div class="input-with-label">
-        <span class="field-label">Сумма, млн $</span>
-        <input type="number" value="${def.amount||500}" min="1">
-      </div>
-      <div class="input-with-label">
-        <span class="field-label">Ставка, %</span>
-        <input type="number" value="${def.rate||15}" step="0.1">
-      </div>
-      <div class="input-with-label">
-        <span class="field-label">Срок, мес.</span>
-        <input type="number" value="${def.months||12}" min="1" max="360">
-      </div>
-      <div class="input-with-label">
-        <span class="field-label">Налог, %</span>
-        <input type="number" value="${def.tax||25}" step="0.5">
-      </div>
-    </div>
-    
+    <select class="instr-select">${opts}</select>
+    <div class="mob-field"><span class="mob-lbl">Сумма, млн $</span><input type="number" value="${def.amount||500}" min="1"></div>
+    <div class="mob-field"><span class="mob-lbl">Ставка, %</span><input type="number" value="${def.rate||15}" step="0.1"></div>
+    <div class="mob-field"><span class="mob-lbl">Срок, мес.</span><input type="number" value="${def.months||12}" min="1" max="360"></div>
+    <div class="mob-field"><span class="mob-lbl">Налог, %</span><input type="number" value="${def.tax||25}" step="0.5"></div>
     <button class="btn-del" onclick="delRow(${id})">×</button>
   `;
-  
+
   document.getElementById('instrList').appendChild(div);
 }
   
@@ -552,7 +441,8 @@ function delRow(id){
 
 function getRows(){
   return [...document.querySelectorAll('#instrList .instr-row')].map(row=>{
-    const [sel,...ins]=row.querySelectorAll('select,input');
+    const sel = row.querySelector('select');
+    const ins = [...row.querySelectorAll('input')];
     return {type:sel.value, amount:+ins[0].value||0, rate:+ins[1].value||0,
             months:+ins[2].value||12, tax:+ins[3].value||25};
   });
@@ -697,8 +587,9 @@ function renderWaterfall(year, scenData) {
     borderColor: baseBorders,
     borderWidth: 1.5,
     borderRadius: 3,
-    categoryPercentage: hasS ? 0.85 : 0.6,
-    barPercentage:      hasS ? 0.48 : 0.75,
+    // No-scenario: wider bars; with scenario: wide + almost touching (categoryPercentage near 1, barPercentage split leaves tiny gap)
+    categoryPercentage: hasS ? 0.92 : 0.72,
+    barPercentage:      hasS ? 0.49 : 0.85,
   }];
 
   if (hasS) {
@@ -709,8 +600,8 @@ function renderWaterfall(year, scenData) {
       borderColor: scenBorders,
       borderWidth: 2,
       borderRadius: 3,
-      categoryPercentage: 0.85,
-      barPercentage: 0.48,
+      categoryPercentage: 0.92,
+      barPercentage: 0.49,
     });
   }
 
