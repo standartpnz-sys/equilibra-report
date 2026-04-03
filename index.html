@@ -574,7 +574,7 @@ function renderWaterfall(year, scenData) {
   document.getElementById('legendStd').style.display    = hasS ? 'none'  : 'flex';
   document.getElementById('legendGrouped').classList.toggle('show', hasS);
 
-  // Adjust chart height for grouped mode
+  // Adjust chart height for grouped mode (more bars)
   document.getElementById('chartWrap').style.height = hasS ? '480px' : '420px';
 
   if (wfChart) wfChart.destroy();
@@ -587,8 +587,9 @@ function renderWaterfall(year, scenData) {
     borderColor: baseBorders,
     borderWidth: 1.5,
     borderRadius: 3,
-    categoryPercentage: hasS ? 0.98 : 0.72,  // grouped: почти вся ширина категории
-    barPercentage:      hasS ? 0.48 : 0.85,  // каждый столбик — почти половина
+    // No-scenario: wider bars; with scenario: wide + almost touching (categoryPercentage near 1, barPercentage split leaves tiny gap)
+    categoryPercentage: hasS ? 0.92 : 0.72,
+    barPercentage:      hasS ? 0.49 : 0.85,
   }];
 
   if (hasS) {
@@ -599,27 +600,25 @@ function renderWaterfall(year, scenData) {
       borderColor: scenBorders,
       borderWidth: 2,
       borderRadius: 3,
-      categoryPercentage: 0.98,
-      barPercentage: 0.48,
+      categoryPercentage: 0.92,
+      barPercentage: 0.49,
     });
   }
 
-  // Value label plugin:
-  //   - без сценария: подписи показываем (есть место)
-  //   - с grouped bars: подписи скрываем, значения только в tooltip
+  // Value label plugin
   const valueLabelPlugin = {
     id: 'vl',
     afterDatasetsDraw(ch) {
-      if (hasS) return; // grouped mode — no labels, use tooltip
       const { ctx: c, scales: { y } } = ch;
       c.save();
+      const allSteps = [baseSteps, scenSteps];
       ch.data.datasets.forEach((ds, di) => {
-        const steps = baseSteps;
+        const steps = allSteps[di] || baseSteps;
         const meta  = ch.getDatasetMeta(di);
         ds.data.forEach((val, i) => {
           const av  = Math.abs(steps[i].value);
           const lbl = av >= 1000 ? (av / 1000).toFixed(1) + 'k' : av.toString();
-          c.fillStyle    = '#4a6090';
+          c.fillStyle    = di === 0 ? '#4a6090' : '#5a2d9a';
           c.font         = `600 10px "IBM Plex Sans",sans-serif`;
           c.textAlign    = 'center';
           c.textBaseline = 'bottom';
