@@ -481,14 +481,11 @@ function renderWaterfall(year, scenData) {
     label:`Базовый ${year}`, data:baseFloating,
     backgroundColor:baseColors, borderColor:baseBorders,
     borderWidth:1.5, borderRadius:3,
-    categoryPercentage:hasS?0.98:0.72,   // grouped: почти вся ширина категории
-    barPercentage:hasS?0.48:0.85,        // каждый столбик ~половина → зазор 2–3 px
   }];
   if (hasS) datasets.push({
     label:'Сценарий', data:scenFloating,
     backgroundColor:scenColors, borderColor:scenBorders,
     borderWidth:2, borderRadius:3,
-    categoryPercentage:0.98, barPercentage:0.48,
   });
 
   // Подписи только без сценария; в grouped — только tooltip
