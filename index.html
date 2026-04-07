@@ -357,10 +357,9 @@ function loadFromUrl() {
     const hasInstrs = instruments && Array.isArray(instruments) && instruments.length > 0;
 
     if (hasInstrs) {
-      // очищаем обе группы
       document.getElementById('instrListDebt').innerHTML='';
       document.getElementById('instrListTrade').innerHTML='';
-      instruments.forEach(instr => addRow(instr, true)); // fromBot=true → пунктирная рамка
+      instruments.forEach(instr => addRow(instr, true));
     }
 
     if (scenPayload) { urlScenarioData=scenPayload; activeScenario=scenPayload; }
@@ -371,11 +370,17 @@ function loadFromUrl() {
         ? `Получен сценарный анализ за ${scenYear} г. — сравнение «базовый vs сценарий» активно`
         : `Данные за ${yearKeys.join(', ')} г. загружены из EquiLibra Bot`;
 
-    // Применяем сценарий: если пришли инструменты — считаем их,
-    // иначе если пришёл готовый scenPayload — используем его напрямую
+    // Применяем: если пришли instruments — пересчитываем через них,
+    // иначе если пришёл готовый scenPayload — рендерим напрямую.
+    // setTimeout надёжнее requestAnimationFrame для ожидания DOM + Chart.js
     if (hasInstrs) {
-      // дать DOM отрисоваться, затем применить
-      requestAnimationFrame(() => requestAnimationFrame(() => applyScenario()));
+      setTimeout(() => applyScenario(), 150);
+    } else if (scenPayload) {
+      renderWaterfall(activeYear, scenPayload);
+      renderMetrics(activeYear, scenPayload);
+      renderAnnotations(activeYear, scenPayload);
+      renderDebtPanel(activeYear, scenPayload);
+      renderTrend(activeYear, scenPayload);
     }
 
   } catch(e) { console.warn('loadFromUrl error:', e); }
@@ -955,9 +960,11 @@ function showYear(year,el){
 // ═══════════════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════════════
-addRow('debt');
-addRow('trade');
+// loadFromUrl идёт первым — он заполнит инструменты из URL если они есть.
+// Дефолтные строки добавляются только если URL не содержит instruments.
 loadFromUrl();
+const _hasUrlInstrs = document.querySelectorAll('.instr-row').length > 0;
+if (!_hasUrlInstrs) { addRow('debt'); addRow('trade'); }
 renderWaterfall(activeYear,activeScenario);
 renderMetrics(activeYear,activeScenario);
 renderAnnotations(activeYear,activeScenario);
