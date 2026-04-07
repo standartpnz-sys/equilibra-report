@@ -75,14 +75,48 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 .scenario-card{background:#fff;border-radius:14px;box-shadow:0 2px 20px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:24px;max-width:1100px;margin-left:auto;margin-right:auto}
 .scenario-title{font-size:15px;font-weight:700;color:#1a2332;margin-bottom:4px}
 .scenario-subtitle{font-size:12px;color:#8a96a8;margin-bottom:16px}
-.instr-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
-.instr-hdr{display:grid;grid-template-columns:190px 105px 85px 80px 80px 34px;gap:8px;padding:0 14px;margin-bottom:2px}
-.instr-hdr span{font-size:10px;font-weight:700;color:#8a96a8;text-transform:uppercase;letter-spacing:.7px}
-.instr-row{display:grid;grid-template-columns:190px 105px 85px 80px 80px 34px;gap:8px;align-items:center;background:#f8faff;border:1.5px solid #e0e8f5;border-radius:9px;padding:10px 14px}
+
+/* ── Группы инструментов ── */
+.instr-group{margin-bottom:18px}
+.instr-group-hdr{display:flex;align-items:center;gap:10px;margin-bottom:8px;padding:8px 14px;border-radius:8px}
+.instr-group-hdr.debt{background:#fff0f0;border:1.5px solid #f5c0c0}
+.instr-group-hdr.trade{background:#f0f8ff;border:1.5px solid #b8d8f5}
+.instr-group-badge{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:4px}
+.instr-group-badge.debt{background:#c62828;color:#fff}
+.instr-group-badge.trade{background:#1a3a6b;color:#fff}
+.instr-group-title{font-size:12px;font-weight:600;color:#1a2332}
+.instr-group-hint{font-size:11px;color:#8a96a8;margin-left:auto}
+.instr-group-add{background:transparent;border:none;cursor:pointer;font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px;transition:all .2s}
+.instr-group-add.debt{color:#c62828;border:1.5px solid #f5c0c0}.instr-group-add.debt:hover{background:#fff0f0}
+.instr-group-add.trade{color:#1a3a6b;border:1.5px solid #b8d8f5}.instr-group-add.trade:hover{background:#e8f2ff}
+
+.instr-list{display:flex;flex-direction:column;gap:8px;min-height:0}
+
+/* строка инструмента — умная сетка через CSS переменные */
+.instr-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-radius:9px;padding:10px 14px;border:1.5px solid #e0e8f5;background:#f8faff;position:relative}
+.instr-row.debt-row{background:#fff7f7;border-color:#f0cccc}
+.instr-row.trade-row{background:#f5faff;border-color:#c0d8f0}
+.instr-row.from-bot{border-style:dashed;box-shadow:0 0 0 2px rgba(26,58,107,.12)}
+
+/* поля внутри строки */
+.f-type{flex:0 0 210px}
+.f-dir{flex:0 0 150px}
+.f-amount{flex:0 0 110px}
+.f-rate{flex:0 0 82px}
+.f-months{flex:0 0 82px}
+.f-tax{flex:0 0 82px}
 .instr-row select,.instr-row input{border:1.5px solid #d0d8e8;border-radius:7px;padding:7px 10px;font-size:12px;font-family:'IBM Plex Sans',sans-serif;color:#1a2332;background:#fff;outline:none;width:100%;transition:border-color .2s}
 .instr-row select:focus,.instr-row input:focus{border-color:#1a3a6b}
-.btn-del{width:30px;height:30px;border:1.5px solid #e8d0d0;background:#fff5f5;border-radius:7px;color:#c62828;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;padding:0;font-weight:300}
+.instr-row.debt-row select,.instr-row.debt-row input{border-color:#f0cccc}
+.instr-row.debt-row select:focus,.instr-row.debt-row input:focus{border-color:#c62828}
+.instr-row.trade-row select,.instr-row.trade-row input{border-color:#c0d8f0}
+.instr-row.trade-row select:focus,.instr-row.trade-row input:focus{border-color:#1a3a6b}
+.field-lbl-inner{font-size:9px;font-weight:700;color:#a0aab8;text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:2px}
+.f-wrap{display:flex;flex-direction:column}
+
+.btn-del{flex-shrink:0;width:30px;height:30px;border:1.5px solid #e8d0d0;background:#fff5f5;border-radius:7px;color:#c62828;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;padding:0;font-weight:300;margin-left:auto}
 .btn-del:hover{background:#ffeaea;border-color:#c62828}
+
 .form-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px}
 .btn{padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;transition:all .2s;border:none}
 .btn-primary{background:#1a3a6b;color:#fff}.btn-primary:hover{background:#2a5a9b}
@@ -115,18 +149,16 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
   .chart-card,.scenario-card{padding:18px 14px}
 
   /* Инструменты — вертикальный стек */
-  .instr-hdr{display:none}
-  .instr-row{grid-template-columns:1fr !important;gap:8px;padding:14px}
-  /* .field-wrap добавляется через JS на мобиле */
-  .field-wrap{display:flex;flex-direction:column;gap:3px}
-  .field-lbl{font-size:11px;font-weight:600;color:#8a96a8}
+  .f-type,.f-dir,.f-amount,.f-rate,.f-months,.f-tax{flex:1 1 100%}
+  .instr-row{flex-direction:column;align-items:stretch}
   .instr-row input,.instr-row select{padding:10px 12px;font-size:13px}
-  .btn-del{width:100%;height:38px;font-size:14px}
+  .btn-del{width:100%;height:38px;font-size:14px;margin-left:0}
 
   .form-actions{flex-direction:column;align-items:stretch;gap:10px}
   .btn{padding:14px;font-size:14px}
   .annotations{flex-direction:column}
   .ann-item{min-width:100%;max-width:100%}
+  .instr-group-hint{display:none}
 }
 </style>
 </head>
@@ -201,16 +233,31 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 
 <div class="scenario-card">
   <div class="scenario-title">🔧 Сценарный анализ — финансовые инструменты</div>
-  <div class="scenario-subtitle">Добавьте инструменты — система суммирует их влияние и обновит все показатели</div>
+  <div class="scenario-subtitle">Долговые инструменты увеличивают долговой портфель · Торговые — работают без роста долга · Система суммирует эффект и обновляет все показатели</div>
 
-  <div class="instr-hdr">
-    <span>Тип инструмента</span><span>Сумма, млн $</span><span>Ставка, %</span>
-    <span>Срок, мес.</span><span>Налог, %</span><span></span>
+  <!-- ГРУППА 1: ДОЛГОВЫЕ -->
+  <div class="instr-group">
+    <div class="instr-group-hdr debt">
+      <span class="instr-group-badge debt">ДОЛГОВЫЕ</span>
+      <span class="instr-group-title">Инструменты, увеличивающие / уменьшающие долговой портфель</span>
+      <span class="instr-group-hint">Кредит · Облигации · Факторинг с регрессом · Досрочное погашение · Выкуп облигаций</span>
+      <button class="instr-group-add debt" onclick="addRow('debt')">＋ Добавить</button>
+    </div>
+    <div class="instr-list" id="instrListDebt"></div>
   </div>
-  <div class="instr-list" id="instrList"></div>
+
+  <!-- ГРУППА 2: ТОРГОВЫЕ -->
+  <div class="instr-group">
+    <div class="instr-group-hdr trade">
+      <span class="instr-group-badge trade">ТОРГОВЫЕ / SCF</span>
+      <span class="instr-group-title">Инструменты через КЗ и оборотный капитал, ковенантный долг не растёт</span>
+      <span class="instr-group-hint">Реверсный факторинг · Коммерческий кредит · Дин. дисконтирование · SCF</span>
+      <button class="instr-group-add trade" onclick="addRow('trade')">＋ Добавить</button>
+    </div>
+    <div class="instr-list" id="instrListTrade"></div>
+  </div>
 
   <div class="form-actions">
-    <button class="btn btn-add" onclick="addRow()">＋ Добавить инструмент</button>
     <button class="btn btn-primary" onclick="applyScenario()">▶ Применить сценарий</button>
     <button class="btn btn-reset" onclick="resetScenario()">✕ Сбросить</button>
     <button class="btn btn-pdf" onclick="exportPDF()">⬇ Сохранить в PDF</button>
@@ -304,18 +351,33 @@ function loadFromUrl() {
     const banner=document.getElementById('urlBanner');
     banner.classList.add('show');
     document.getElementById('urlBannerTitle').textContent=company;
-    document.getElementById('urlBannerSub').textContent=scenPayload
-      ? `Получен сценарный анализ за ${scenYear} г. — сравнение «базовый vs сценарий» активно`
-      : `Данные за ${yearKeys.join(', ')} г. загружены из EquiLibra Bot`;
+
+    // Автозаполнение инструментов из бота
+    const instruments = rawData.instruments;
+    const hasInstrs = instruments && Array.isArray(instruments) && instruments.length > 0;
+
+    if (hasInstrs) {
+      // очищаем обе группы
+      document.getElementById('instrListDebt').innerHTML='';
+      document.getElementById('instrListTrade').innerHTML='';
+      instruments.forEach(instr => addRow(instr, true)); // fromBot=true → пунктирная рамка
+    }
 
     if (scenPayload) { urlScenarioData=scenPayload; activeScenario=scenPayload; }
 
-    // Автозаполнение инструментов из бота
-    if (rawData.instruments && Array.isArray(rawData.instruments) && rawData.instruments.length>0) {
-      document.getElementById('instrList').innerHTML=''; // сброс дефолтного ряда
-      rawData.instruments.forEach(instr => addRow(instr));
-      setTimeout(() => applyScenario(), 300);
+    document.getElementById('urlBannerSub').textContent = hasInstrs
+      ? `Загружено ${instruments.length} инструмент(ов) · сценарий рассчитан автоматически`
+      : scenPayload
+        ? `Получен сценарный анализ за ${scenYear} г. — сравнение «базовый vs сценарий» активно`
+        : `Данные за ${yearKeys.join(', ')} г. загружены из EquiLibra Bot`;
+
+    // Применяем сценарий: если пришли инструменты — считаем их,
+    // иначе если пришёл готовый scenPayload — используем его напрямую
+    if (hasInstrs) {
+      // дать DOM отрисоваться, затем применить
+      requestAnimationFrame(() => requestAnimationFrame(() => applyScenario()));
     }
+
   } catch(e) { console.warn('loadFromUrl error:', e); }
 }
 
@@ -324,86 +386,220 @@ function dismissUrlBanner() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// INSTRUMENT ROWS
+// INSTRUMENT DEFINITIONS
 // ═══════════════════════════════════════════════════════════════
-const TYPES = [
-  {v:'credit',  l:'Кредит (привлечение долга)'},
-  {v:'bond',    l:'Облигации (выпуск)'},
-  {v:'deposit', l:'Депозит (размещение средств)'},
-  {v:'trade',   l:'Торговый / Supply-Chain Finance'},
+const DEBT_TYPES = [
+  // привлечение — увеличивают ковенантный долг
+  {v:'credit',       l:'Кредит',                        dir:'attract', fields:['amount','rate','months','tax']},
+  {v:'bond_issue',   l:'Облигационный займ',             dir:'attract', fields:['amount','rate','months','tax']},
+  {v:'factor_reg',   l:'Факторинг с регрессом',          dir:'attract', fields:['amount','rate','months','tax']},
+  // погашение — уменьшают ковенантный долг
+  {v:'early_repay',  l:'Досрочное погашение кредита',   dir:'reduce',  fields:['amount','rate','tax']},
+  {v:'bond_buyback', l:'Выкуп / погашение облигаций',   dir:'reduce',  fields:['amount','rate','tax']},
 ];
+
+const TRADE_TYPES = [
+  // SCF-инструменты — работают через КЗ, ковенантный долг не растёт
+  {v:'rev_factor',   l:'Реверсный факторинг',           dir:'place',   fields:['amount','rate','months','tax']},
+  {v:'com_credit',   l:'Коммерческий кредит поставщикам', dir:'place', fields:['amount','rate','months','tax']},
+  {v:'dyn_disc',     l:'Динамическое дисконтирование',  dir:'place',   fields:['amount','rate','months','tax']},
+  {v:'scf',          l:'SCF / факторинг без регресса',   dir:'place',   fields:['amount','rate','months','tax']},
+];
+
+const ALL_TYPES = [...DEBT_TYPES, ...TRADE_TYPES];
+
+function getTypeDef(v) { return ALL_TYPES.find(t=>t.v===v) || DEBT_TYPES[0]; }
+function getGroupOf(v) { return DEBT_TYPES.find(t=>t.v===v) ? 'debt' : 'trade'; }
+
+const FIELD_META = {
+  amount: {lbl:'Сумма, млн $', placeholder:'500', min:1,   step:1,   type:'number'},
+  rate:   {lbl:'Ставка / доход, %', placeholder:'15',  min:0,   step:0.1, type:'number'},
+  months: {lbl:'Срок, мес.',  placeholder:'12',  min:1,   step:1,   type:'number', max:360},
+  tax:    {lbl:'Налог, %',    placeholder:'25',  min:0,   step:0.5, type:'number'},
+};
 
 const isMobile = () => window.innerWidth <= 768;
 
-function addRow(def={}) {
-  const id=++rowCounter;
-  const opts=TYPES.map(t=>`<option value="${t.v}"${def.type===t.v?' selected':''}>${t.l}</option>`).join('');
-
-  const div=document.createElement('div');
-  div.className='instr-row';
-  div.dataset.rid=id;
-
-  if (isMobile()) {
-    div.innerHTML=`
-      <div class="field-wrap"><span class="field-lbl">Тип инструмента</span><select>${opts}</select></div>
-      <div class="field-wrap"><span class="field-lbl">Сумма, млн $</span><input type="number" value="${def.amount||500}" min="1"></div>
-      <div class="field-wrap"><span class="field-lbl">Ставка, %</span><input type="number" value="${def.rate||15}" step="0.1"></div>
-      <div class="field-wrap"><span class="field-lbl">Срок, мес.</span><input type="number" value="${def.months||12}" min="1" max="360"></div>
-      <div class="field-wrap"><span class="field-lbl">Налог, %</span><input type="number" value="${def.tax||25}" step="0.5"></div>
-      <button class="btn-del" onclick="delRow(${id})">× Удалить</button>`;
+// ═══════════════════════════════════════════════════════════════
+// ADD / DEL / REBUILD ROW
+// ═══════════════════════════════════════════════════════════════
+function addRow(groupOrDef='debt', fromBot=false) {
+  // groupOrDef может быть строкой ('debt'|'trade') или объектом {type,amount,...}
+  let group, def={};
+  if (typeof groupOrDef === 'object') {
+    def = groupOrDef;
+    group = getGroupOf(def.type || DEBT_TYPES[0].v);
   } else {
-    div.innerHTML=`
-      <select>${opts}</select>
-      <input type="number" value="${def.amount||500}" min="1">
-      <input type="number" value="${def.rate||15}" step="0.1">
-      <input type="number" value="${def.months||12}" min="1" max="360">
-      <input type="number" value="${def.tax||25}" step="0.5">
-      <button class="btn-del" onclick="delRow(${id})">×</button>`;
+    group = groupOrDef;
+    def.type = group==='debt' ? DEBT_TYPES[0].v : TRADE_TYPES[0].v;
   }
 
-  document.getElementById('instrList').appendChild(div);
+  const id = ++rowCounter;
+  const listId = group==='debt' ? 'instrListDebt' : 'instrListTrade';
+  const typeList = group==='debt' ? DEBT_TYPES : TRADE_TYPES;
+
+  const div = document.createElement('div');
+  div.className = `instr-row ${group}-row${fromBot?' from-bot':''}`;
+  div.dataset.rid = id;
+  div.dataset.group = group;
+
+  renderRowContent(div, id, typeList, def, group);
+  document.getElementById(listId).appendChild(div);
+}
+
+function renderRowContent(div, id, typeList, def, group) {
+  const typeDef = getTypeDef(def.type) || typeList[0];
+  const fields  = typeDef.fields;
+
+  // select типа
+  const opts = typeList.map(t=>`<option value="${t.v}"${def.type===t.v?' selected':''}>${t.l}</option>`).join('');
+  const dirBadge = {attract:'↑ Привлечение', reduce:'↓ Погашение', place:'↑ SCF / Оборотный капитал'}[typeDef.dir]||'';
+  const dirColor = {attract:'#c62828', reduce:'#e65100', place:'#1a3a6b'}[typeDef.dir]||'#888';
+
+  let html = `<div class="f-wrap f-type">
+    <span class="field-lbl-inner">Инструмент</span>
+    <select onchange="onTypeChange(${id},this.value,'${group}')">${opts}</select>
+  </div>
+  <div style="display:flex;align-items:center;flex-shrink:0;padding-top:14px">
+    <span style="font-size:10px;font-weight:700;color:${dirColor};white-space:nowrap;border:1px solid ${dirColor};border-radius:4px;padding:2px 6px">${dirBadge}</span>
+  </div>`;
+
+  for (const fk of fields) {
+    const fm = FIELD_META[fk];
+    const val = def[fk] !== undefined ? def[fk] : fm.placeholder;
+    html += `<div class="f-wrap f-${fk}">
+      <span class="field-lbl-inner">${fm.lbl}</span>
+      <input type="${fm.type}" value="${val}" placeholder="${fm.placeholder}"
+        ${fm.min!==undefined?`min="${fm.min}"`:''}
+        ${fm.max!==undefined?`max="${fm.max}"`:''}
+        step="${fm.step}" data-field="${fk}">
+    </div>`;
+  }
+
+  html += `<button class="btn-del" onclick="delRow(${id})" title="Удалить">×</button>`;
+  div.innerHTML = html;
+}
+
+function onTypeChange(id, newType, group) {
+  const div = document.querySelector(`[data-rid="${id}"]`);
+  if (!div) return;
+  const typeList = group==='debt' ? DEBT_TYPES : TRADE_TYPES;
+  // собираем текущие значения полей
+  const cur = {};
+  div.querySelectorAll('input[data-field]').forEach(inp => { cur[inp.dataset.field] = parseFloat(inp.value)||0; });
+  cur.type = newType;
+  renderRowContent(div, id, typeList, cur, group);
 }
 
 function delRow(id) {
-  const el=document.querySelector(`[data-rid="${id}"]`);
+  const el = document.querySelector(`[data-rid="${id}"]`);
   if (el) el.remove();
 }
 
 function getRows() {
-  return [...document.querySelectorAll('#instrList .instr-row')].map(row => {
-    const sel=row.querySelector('select');
-    const ins=[...row.querySelectorAll('input')];
-    return {type:sel.value, amount:+ins[0].value||0, rate:+ins[1].value||0,
-            months:+ins[2].value||12, tax:+ins[3].value||25};
+  return [...document.querySelectorAll('.instr-row')].map(row => {
+    const sel = row.querySelector('select');
+    const result = { type: sel ? sel.value : '' };
+    row.querySelectorAll('input[data-field]').forEach(inp => {
+      result[inp.dataset.field] = parseFloat(inp.value) || 0;
+    });
+    // defaults
+    if (result.rate   === undefined) result.rate   = 0;
+    if (result.months === undefined) result.months = 12;
+    if (result.tax    === undefined) result.tax    = 25;
+    if (result.amount === undefined) result.amount = 0;
+    return result;
   });
 }
 
 // ═══════════════════════════════════════════════════════════════
 // SCENARIO CALCULATOR
 // ═══════════════════════════════════════════════════════════════
-function calcOne(s, {type,amount,rate,months,tax:tp}) {
+function calcOne(s, {type, amount, rate=0, months=12, tax:tp=25}) {
   const rf=rate/100, tf=tp/100, fr=months/12, lines=[];
-  if (type==='credit'||type==='bond') {
+  const base = data[activeYear];
+
+  // ── ДОЛГОВЫЕ ──────────────────────────────────────────────
+
+  if (type==='credit' || type==='bond_issue') {
+    // Привлечение: рост долга + кэш, процентные расходы, налоговый щит
     const gI=amount*rf*fr, sh=gI*tf;
     s.debt+=amount; s.cash+=amount;
     s.interest_paid+=gI; s.tax=Math.max(0,s.tax-sh); s.ocf+=sh;
     s.fcf=s.ocf-s.capex-s.interest_paid;
-    const tn=type==='credit'?'Кредит':'Облигации';
-    lines.push({l:`[${tn}] +Долг`,v:+amount,g:1},{l:`[${tn}] Проц. брутто`,v:-gI,g:-1},
-               {l:`[${tn}] Налог. щит`,v:+sh,g:1},{l:`[${tn}] ∆FCF`,v:s.fcf-data[activeYear].fcf,g:Math.sign(s.fcf-data[activeYear].fcf)});
-  } else if (type==='deposit') {
-    const gI=amount*rf*fr, tI=gI*tf, nI=gI-tI;
-    s.cash-=amount; s.tax+=tI; s.ocf+=nI;
+    const tn=type==='credit'?'Кредит':'Облиг. займ';
+    lines.push(
+      {l:`[${tn}] +Долг`,              v:+amount,            g:1},
+      {l:`[${tn}] Проц. расход брутто`,v:-gI,                g:-1},
+      {l:`[${tn}] Налог. щит`,         v:+sh,                g:1},
+      {l:`[${tn}] ∆FCF`,               v:s.fcf-base.fcf,     g:Math.sign(s.fcf-base.fcf)},
+    );
+
+  } else if (type==='factor_reg') {
+    // Факторинг с регрессом: краткосрочный долг, комиссия как % расход
+    const fee=amount*rf*fr, sh=fee*tf;
+    s.debt+=amount; s.cash+=amount;
+    s.interest_paid+=fee; s.tax=Math.max(0,s.tax-sh); s.ocf+=sh;
     s.fcf=s.ocf-s.capex-s.interest_paid;
-    lines.push({l:'[Депозит] −Кэш',v:-amount,g:-1},{l:'[Депозит] Доход нетто',v:+nI,g:1},
-               {l:'[Депозит] ∆FCF',v:s.fcf-data[activeYear].fcf,g:Math.sign(s.fcf-data[activeYear].fcf)});
-  } else if (type==='trade') {
-    const fee=amount*rf*fr, fsh=fee*tf, nf=fee-fsh;
-    s.wc_change+=amount; s.ocf+=amount; s.interest_paid+=nf;
+    lines.push(
+      {l:'[Факт. с регр.] +Долг',      v:+amount,            g:1},
+      {l:'[Факт. с регр.] Комиссия',   v:-fee,               g:-1},
+      {l:'[Факт. с регр.] Нал. щит',   v:+sh,                g:1},
+      {l:'[Факт. с регр.] ∆FCF',       v:s.fcf-base.fcf,     g:Math.sign(s.fcf-base.fcf)},
+    );
+
+  } else if (type==='early_repay') {
+    // Досрочное погашение: снижаем долг и кэш, экономим будущие проценты
+    const savedI=amount*rf*fr, sh=savedI*tf;
+    s.debt-=amount; s.cash-=amount;
+    s.interest_paid=Math.max(0,s.interest_paid-savedI);
+    s.tax=Math.max(0,s.tax+sh); s.ocf-=sh;
     s.fcf=s.ocf-s.capex-s.interest_paid;
-    lines.push({l:'[Trade] +ЧОК→+OCF',v:+amount,g:1},{l:'[Trade] Комиссия нетто',v:-nf,g:-1},
-               {l:'[Trade] ∆FCF',v:s.fcf-data[activeYear].fcf,g:Math.sign(s.fcf-data[activeYear].fcf)});
+    lines.push(
+      {l:'[Досрочн. погаш.] −Долг',    v:-amount,            g:1},
+      {l:'[Досрочн. погаш.] Экон. %',  v:+savedI,            g:1},
+      {l:'[Досрочн. погаш.] ∆FCF',     v:s.fcf-base.fcf,     g:Math.sign(s.fcf-base.fcf)},
+    );
+
+  } else if (type==='bond_buyback') {
+    // Выкуп облигаций: снижаем долг, экономим купон
+    const savedI=amount*rf*fr, sh=savedI*tf;
+    s.debt-=amount; s.cash-=amount;
+    s.interest_paid=Math.max(0,s.interest_paid-savedI);
+    s.tax=Math.max(0,s.tax+sh); s.ocf-=sh;
+    s.fcf=s.ocf-s.capex-s.interest_paid;
+    lines.push(
+      {l:'[Выкуп обл.] −Долг',         v:-amount,            g:1},
+      {l:'[Выкуп обл.] Экон. купон',   v:+savedI,            g:1},
+      {l:'[Выкуп обл.] ∆FCF',          v:s.fcf-base.fcf,     g:Math.sign(s.fcf-base.fcf)},
+    );
+
+  // ── ТОРГОВЫЕ / SCF ────────────────────────────────────────
+  // Общая механика: увеличиваем КЗ → улучшаем ЧОК → растёт OCF.
+  // Долг (ковенантный) не меняется. Комиссия относится к % расходам.
+
+  } else if (type==='rev_factor' || type==='com_credit' || type==='dyn_disc' || type==='scf') {
+    // Реверсный факторинг / коммерческий кредит / дин. дисконтирование / SCF без регресса:
+    // поставщик получает деньги досрочно через банк; Норникель удлиняет отсрочку платежа.
+    // Эффект: ∆КЗ → +ЧОК → +OCF. Комиссия банку — как % расход (нетто налога).
+    const fee=amount*rf*fr, sh=fee*tf, netFee=fee-sh;
+    s.wc_change+=amount; s.ocf+=amount;          // рост КЗ улучшает ЧОК и OCF
+    s.interest_paid+=netFee;                      // комиссия нетто снижает FCF
+    s.fcf=s.ocf-s.capex-s.interest_paid;
+    const labels = {
+      rev_factor: 'Рев. факторинг',
+      com_credit: 'Комм. кредит',
+      dyn_disc:   'Дин. дисконт.',
+      scf:        'SCF',
+    };
+    const tn = labels[type];
+    lines.push(
+      {l:`[${tn}] +ЧОК (∆КЗ)→+OCF`,  v:+amount,            g:1},
+      {l:`[${tn}] Комиссия нетто`,     v:-netFee,            g:-1},
+      {l:`[${tn}] ∆FCF`,               v:s.fcf-base.fcf,     g:Math.sign(s.fcf-base.fcf)},
+    );
   }
+
   return lines;
 }
 
@@ -671,6 +867,8 @@ function renderAnnotations(year,scenData){
 function applyScenario(){
   const instrs=getRows();
   if(!instrs.length){alert('Добавьте хотя бы один инструмент');return;}
+  const debtCount=[...document.querySelectorAll('#instrListDebt .instr-row')].length;
+  const tradeCount=[...document.querySelectorAll('#instrListTrade .instr-row')].length;
   const {scenData,lines}=calcScenario(activeYear,instrs);
   activeScenario=scenData;
   renderWaterfall(activeYear,scenData);
@@ -679,7 +877,10 @@ function applyScenario(){
   renderDebtPanel(activeYear,scenData);
   renderTrend(activeYear,scenData);
   document.getElementById('calcResult').classList.add('show');
-  document.getElementById('calcTitle').textContent=`Совокупный эффект ${instrs.length} инструмента(ов) · год ${activeYear}`;
+  const parts=[];
+  if(debtCount) parts.push(`${debtCount} долг.`);
+  if(tradeCount) parts.push(`${tradeCount} торг.`);
+  document.getElementById('calcTitle').textContent=`Совокупный эффект: ${parts.join(' + ')} инструмент(ов) · год ${activeYear}`;
   document.getElementById('calcLines').innerHTML=lines.map(l=>{
     const cl=l.g>0?'pos':l.g<0?'neg':'',sg=l.g>0?'+':'';
     return `<div class="calc-line"><span>${l.l}</span><span class="cv ${cl}">${sg}${l.v.toFixed(1)}&nbsp;млн&nbsp;$</span></div>`;
@@ -689,6 +890,9 @@ function applyScenario(){
 
 function resetScenario(){
   activeScenario=null; urlScenarioData=null;
+  document.getElementById('instrListDebt').innerHTML='';
+  document.getElementById('instrListTrade').innerHTML='';
+  addRow('debt'); addRow('trade');
   renderWaterfall(activeYear);
   renderAnnotations(activeYear,null);
   renderMetrics(activeYear,null);
@@ -751,7 +955,8 @@ function showYear(year,el){
 // ═══════════════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════════════
-addRow({type:'credit',amount:500,rate:15,months:12,tax:25});
+addRow('debt');
+addRow('trade');
 loadFromUrl();
 renderWaterfall(activeYear,activeScenario);
 renderMetrics(activeYear,activeScenario);
