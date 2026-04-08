@@ -234,6 +234,13 @@ body{font-family:'IBM Plex Sans',sans-serif;background:#f4f6f9;min-height:100vh;
 <div class="scenario-card">
   <div class="scenario-title">🔧 Сценарный анализ — финансовые инструменты</div>
   <div class="scenario-subtitle">Долговые инструменты увеличивают долговой портфель · Торговые — работают без роста долга · Система суммирует эффект и обновляет все показатели</div>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:10px 14px;background:#f8faff;border-radius:8px;border:1px solid #e0e8f5">
+    <span style="font-size:12px;font-weight:600;color:#1a2332">Ставка налога на прибыль (единая для всех инструментов):</span>
+    <input type="number" id="globalTaxInput" value="25" min="0" max="100" step="0.5"
+      style="width:70px;border:1.5px solid #d0d8e8;border-radius:7px;padding:5px 8px;font-size:13px;font-family:inherit"
+      oninput="globalTaxRate=parseFloat(this.value)||25" title="Ставка налога на прибыль, %">
+    <span style="font-size:12px;color:#8a96a8">%</span>
+  </div>
 
   <!-- ГРУППА 1: ДОЛГОВЫЕ -->
   <div class="instr-group">
@@ -304,6 +311,7 @@ const fmtB2   = v => `$${(v/1000).toFixed(2)}B`;
 
 let wfChart=null, debtChartObj=null, trendChartObj=null;
 let activeYear=2025, activeScenario=null, rowCounter=0;
+let globalTaxRate=25; // единая ставка налога на прибыль для всех инструментов
 let urlScenarioData=null;
 
 // ═══════════════════════════════════════════════════════════════
@@ -395,20 +403,20 @@ function dismissUrlBanner() {
 // ═══════════════════════════════════════════════════════════════
 const DEBT_TYPES = [
   // привлечение — увеличивают ковенантный долг
-  {v:'credit',       l:'Кредит',                        dir:'attract', fields:['amount','rate','months','tax']},
-  {v:'bond_issue',   l:'Облигационный займ',             dir:'attract', fields:['amount','rate','months','tax']},
-  {v:'factor_reg',   l:'Факторинг с регрессом',          dir:'attract', fields:['amount','rate','months','tax']},
+  {v:'credit',       l:'Кредит',                        dir:'attract', fields:['amount','rate','start_month','months']},
+  {v:'bond_issue',   l:'Облигационный займ',             dir:'attract', fields:['amount','rate','start_month','months']},
+  {v:'factor_reg',   l:'Факторинг с регрессом',          dir:'attract', fields:['amount','rate','start_month','months']},
   // погашение — уменьшают ковенантный долг
-  {v:'early_repay',  l:'Досрочное погашение кредита',   dir:'reduce',  fields:['amount','rate','tax']},
-  {v:'bond_buyback', l:'Выкуп / погашение облигаций',   dir:'reduce',  fields:['amount','rate','tax']},
+  {v:'early_repay',  l:'Досрочное погашение кредита',   dir:'reduce',  fields:['amount','rate','start_month']},
+  {v:'bond_buyback', l:'Выкуп / погашение облигаций',   dir:'reduce',  fields:['amount','rate','start_month']},
 ];
 
 const TRADE_TYPES = [
   // SCF-инструменты — работают через КЗ, ковенантный долг не растёт
-  {v:'rev_factor',   l:'Реверсный факторинг',           dir:'place',   fields:['amount','rate','months','tax']},
-  {v:'com_credit',   l:'Коммерческий кредит поставщикам', dir:'place', fields:['amount','rate','months','tax']},
-  {v:'dyn_disc',     l:'Динамическое дисконтирование',  dir:'place',   fields:['amount','rate','months','tax']},
-  {v:'scf',          l:'SCF / факторинг без регресса',   dir:'place',   fields:['amount','rate','months','tax']},
+  {v:'rev_factor',   l:'Реверсный факторинг',           dir:'place',   fields:['amount','rate','start_month','months']},
+  {v:'com_credit',   l:'Коммерческий кредит поставщикам', dir:'place', fields:['amount','rate','start_month','months']},
+  {v:'dyn_disc',     l:'Динамическое дисконтирование',  dir:'place',   fields:['amount','rate','start_month','months']},
+  {v:'scf',          l:'SCF / факторинг без регресса',   dir:'place',   fields:['amount','rate','start_month','months']},
 ];
 
 const ALL_TYPES = [...DEBT_TYPES, ...TRADE_TYPES];
@@ -417,11 +425,12 @@ function getTypeDef(v) { return ALL_TYPES.find(t=>t.v===v) || DEBT_TYPES[0]; }
 function getGroupOf(v) { return DEBT_TYPES.find(t=>t.v===v) ? 'debt' : 'trade'; }
 
 const FIELD_META = {
-  amount: {lbl:'Сумма, млн $', placeholder:'500', min:1,   step:1,   type:'number'},
-  rate:   {lbl:'Ставка / доход, %', placeholder:'15',  min:0,   step:0.1, type:'number'},
-  months: {lbl:'Срок, мес.',  placeholder:'12',  min:1,   step:1,   type:'number', max:360},
-  tax:    {lbl:'Налог, %',    placeholder:'25',  min:0,   step:0.5, type:'number'},
+  amount:      {lbl:'Сумма, млн $',      placeholder:'500', min:1,  step:1,   type:'number'},
+  rate:        {lbl:'Ставка / доход, %', placeholder:'15',  min:0,  step:0.1, type:'number'},
+  start_month: {lbl:'Месяц начала',      placeholder:'1',   min:1,  step:1,   type:'number', max:12},
+  months:      {lbl:'Срок, мес.',        placeholder:'12',  min:1,  step:1,   type:'number', max:360},
 };
+// tax убран из полей инструмента — используется глобальный globalTaxRate
 
 const isMobile = () => window.innerWidth <= 768;
 
@@ -508,11 +517,10 @@ function getRows() {
     row.querySelectorAll('input[data-field]').forEach(inp => {
       result[inp.dataset.field] = parseFloat(inp.value) || 0;
     });
-    // defaults
-    if (result.rate   === undefined) result.rate   = 0;
-    if (result.months === undefined) result.months = 12;
-    if (result.tax    === undefined) result.tax    = 25;
-    if (result.amount === undefined) result.amount = 0;
+    if (result.amount      === undefined) result.amount      = 0;
+    if (result.rate        === undefined) result.rate        = 0;
+    if (result.start_month === undefined) result.start_month = 1;
+    if (result.months      === undefined) result.months      = 12;
     return result;
   });
 }
@@ -520,9 +528,13 @@ function getRows() {
 // ═══════════════════════════════════════════════════════════════
 // SCENARIO CALCULATOR
 // ═══════════════════════════════════════════════════════════════
-function calcOne(s, {type, amount, rate=0, months=12, tax:tp=25}) {
-  const rf=rate/100, tf=tp/100, fr=months/12, lines=[];
+function calcOne(s, {type, amount, rate=0, start_month=1, months=12}) {
+  const rf=rate/100, tf=globalTaxRate/100, lines=[];
   const base = data[activeYear];
+  // Считаем только часть срока, попадающую в активный год (12 месяцев с января)
+  // start_month: 1=январь, 4=апрель и т.д.
+  const monthsInYear = Math.max(0, Math.min(months, 12 - (start_month - 1)));
+  const fr = monthsInYear / 12;
 
   // ── ДОЛГОВЫЕ ──────────────────────────────────────────────
 
@@ -895,6 +907,7 @@ function applyScenario(){
 
 function resetScenario(){
   activeScenario=null; urlScenarioData=null;
+  globalTaxRate=25; document.getElementById('globalTaxInput').value=25;
   document.getElementById('instrListDebt').innerHTML='';
   document.getElementById('instrListTrade').innerHTML='';
   addRow('debt'); addRow('trade');
