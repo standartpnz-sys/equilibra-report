@@ -630,8 +630,6 @@ function calcOne(s, {type, amount, rate=0, start_month=1, months=12}) {
       {l:`[${tn}] Комиссия нетто`,     v:-netFee,            g:-1},
       {l:`[${tn}] ∆FCF`,               v:s.fcf-base.fcf,     g:Math.sign(s.fcf-base.fcf)},
     );
-  }
-
 
   } else if (type==='deposit') {
     // Депозит: размещаем кэш, получаем процентный доход нетто налога
