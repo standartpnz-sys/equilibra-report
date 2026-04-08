@@ -417,6 +417,7 @@ const TRADE_TYPES = [
   {v:'com_credit',   l:'Коммерческий кредит поставщикам', dir:'place', fields:['amount','rate','start_month','months']},
   {v:'dyn_disc',     l:'Динамическое дисконтирование',  dir:'place',   fields:['amount','rate','start_month','months']},
   {v:'scf',          l:'SCF / факторинг без регресса',   dir:'place',   fields:['amount','rate','start_month','months']},
+  {v:'deposit',      l:'Депозит',                        dir:'place',   fields:['amount','rate','start_month','months']},
 ];
 
 const ALL_TYPES = [...DEBT_TYPES, ...TRADE_TYPES];
@@ -427,11 +428,14 @@ function getGroupOf(v) { return DEBT_TYPES.find(t=>t.v===v) ? 'debt' : 'trade'; 
 const FIELD_META = {
   amount:      {lbl:'Сумма, млн $',      placeholder:'500', min:1,  step:1,   type:'number'},
   rate:        {lbl:'Ставка / доход, %', placeholder:'15',  min:0,  step:0.1, type:'number'},
-  start_month: {lbl:'Месяц начала',      placeholder:'1',   min:1,  step:1,   type:'number', max:12},
+  start_month: {lbl:'Месяц начала', type:'select'},
   months:      {lbl:'Срок, мес.',        placeholder:'12',  min:1,  step:1,   type:'number', max:360},
 };
 // tax убран из полей инструмента — используется глобальный globalTaxRate
 
+
+const MONTH_NAMES = ['Январь','Февраль','Март','Апрель','Май','Июнь',
+                     'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 const isMobile = () => window.innerWidth <= 768;
 
 // ═══════════════════════════════════════════════════════════════
@@ -480,14 +484,25 @@ function renderRowContent(div, id, typeList, def, group) {
 
   for (const fk of fields) {
     const fm = FIELD_META[fk];
-    const val = def[fk] !== undefined ? def[fk] : fm.placeholder;
-    html += `<div class="f-wrap f-${fk}">
-      <span class="field-lbl-inner">${fm.lbl}</span>
-      <input type="${fm.type}" value="${val}" placeholder="${fm.placeholder}"
-        ${fm.min!==undefined?`min="${fm.min}"`:''}
-        ${fm.max!==undefined?`max="${fm.max}"`:''}
-        step="${fm.step}" data-field="${fk}">
-    </div>`;
+    if (fm.type === 'select') {
+      // select с названиями месяцев; значение = номер (1–12)
+      const curVal = def[fk] !== undefined ? parseInt(def[fk]) : 1;
+      const opts = MONTH_NAMES.map((m,i) =>
+        `<option value="${i+1}"${curVal===i+1?' selected':''}>${m}</option>`).join('');
+      html += `<div class="f-wrap f-${fk}">
+        <span class="field-lbl-inner">${fm.lbl}</span>
+        <select data-field="${fk}">${opts}</select>
+      </div>`;
+    } else {
+      const val = def[fk] !== undefined ? def[fk] : fm.placeholder;
+      html += `<div class="f-wrap f-${fk}">
+        <span class="field-lbl-inner">${fm.lbl}</span>
+        <input type="${fm.type}" value="${val}" placeholder="${fm.placeholder}"
+          ${fm.min!==undefined?`min="${fm.min}"`:''}
+          ${fm.max!==undefined?`max="${fm.max}"`:''}
+          step="${fm.step}" data-field="${fk}">
+      </div>`;
+    }
   }
 
   html += `<button class="btn-del" onclick="delRow(${id})" title="Удалить">×</button>`;
@@ -514,7 +529,7 @@ function getRows() {
   return [...document.querySelectorAll('.instr-row')].map(row => {
     const sel = row.querySelector('select');
     const result = { type: sel ? sel.value : '' };
-    row.querySelectorAll('input[data-field]').forEach(inp => {
+    row.querySelectorAll('input[data-field], select[data-field]').forEach(inp => {
       result[inp.dataset.field] = parseFloat(inp.value) || 0;
     });
     if (result.amount      === undefined) result.amount      = 0;
@@ -614,6 +629,19 @@ function calcOne(s, {type, amount, rate=0, start_month=1, months=12}) {
       {l:`[${tn}] +ЧОК (∆КЗ)→+OCF`,  v:+amount,            g:1},
       {l:`[${tn}] Комиссия нетто`,     v:-netFee,            g:-1},
       {l:`[${tn}] ∆FCF`,               v:s.fcf-base.fcf,     g:Math.sign(s.fcf-base.fcf)},
+    );
+  }
+
+
+  } else if (type==='deposit') {
+    // Депозит: размещаем кэш, получаем процентный доход нетто налога
+    const gI=amount*rf*fr, tI=gI*tf, nI=gI-tI;
+    s.cash-=amount; s.tax+=tI; s.ocf+=nI;
+    s.fcf=s.ocf-s.capex-s.interest_paid;
+    lines.push(
+      {l:'[Депозит] −Кэш',        v:-amount,         g:-1},
+      {l:'[Депозит] Доход нетто', v:+nI,             g:1},
+      {l:'[Депозит] ∆FCF',        v:s.fcf-base.fcf,  g:Math.sign(s.fcf-base.fcf)},
     );
   }
 
